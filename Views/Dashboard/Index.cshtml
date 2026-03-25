@@ -1,0 +1,37 @@
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="panel-title">🏠 Trang Chủ</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="welcome-box" style="background: #fff3cd; border-left: 4px solid #ffc107;">
+        <p style="color: #856404;">⚠️ @ViewBag.ErrorMessage</p>
+    </div>
+}
+
+<div class="welcome-box">
+    <h2>👋 Chào mừng, @ViewBag.TenDangNhap!</h2>
+    <p>Bạn đang sử dụng tài khoản với vai trò: <strong>@ViewBag.VaiTro</strong></p>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-number">@ViewBag.TongHocSinh</div>
+        <div class="stat-label">Tổng Học Sinh</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">@ViewBag.SoLop</div>
+        <div class="stat-label">Số Lớp</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">@ViewBag.SoNam</div>
+        <div class="stat-label">Học Sinh Nam</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">@ViewBag.SoNu</div>
+        <div class="stat-label">Học Sinh Nữ</div>
+    </div>
+</div>

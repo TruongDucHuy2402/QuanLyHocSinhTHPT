@@ -1,0 +1,37 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\dashboard.css",
+      "PackagePath": "staticwebassets\\css\\dashboard.css"
+    },
+    {
+      "Id": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\hocsinh-list.css",
+      "PackagePath": "staticwebassets\\css\\hocsinh-list.css"
+    },
+    {
+      "Id": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\login.css",
+      "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.QuanLyHocSinhTHPT.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.QuanLyHocSinhTHPT.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.QuanLyHocSinhTHPT.props",
+      "PackagePath": "build\\QuanLyHocSinhTHPT.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.QuanLyHocSinhTHPT.props",
+      "PackagePath": "buildMultiTargeting\\QuanLyHocSinhTHPT.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.QuanLyHocSinhTHPT.props",
+      "PackagePath": "buildTransitive\\QuanLyHocSinhTHPT.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
