@@ -1,0 +1,55 @@
+@using System.Linq
+@model List<QuanLyHocSinhTHPT.Models.HocSinh>
+
+@{
+    ViewData["Title"] = "Danh Sách Học Sinh";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="panel-title">👥 Danh Sách Học Sinh</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Mã HS</th>
+                <th>Họ Tên</th>
+                <th>Lớp</th>
+                <th>Giới Tính</th>
+                <th>Năm Sinh</th>
+                <th>Hành Kiểm</th>
+            </tr>
+        </thead>
+        <tbody>
+@if (Model != null && Model.Count > 0)
+{
+    @foreach (var hs in Model)
+    {
+        
+        string gioiTinhText = hs.GioiTinh; // Dùng thẳng, DB đã lưu "Nam"/"Nữ"
+
+        string hanhKiemClass = hs.HanhKiem == "Tốt" ? "badge-good" 
+                     : hs.HanhKiem == "Khá" ? "badge-notice" 
+                     : "badge-bad";
+        string hanhKiemText = hs.HanhKiem ?? "Chưa có";
+        string namSinh = hs.NgaySinh.HasValue ? hs.NgaySinh.Value.Year.ToString() : "N/A";
+
+        <tr>
+            <td>@hs.MaHS</td>
+            <td>@hs.HoTen</td>
+            <td>@hs.TenLop</td>
+            <td>@gioiTinhText</td>
+            <td>@namSinh</td>
+            <td><span class="badge @hanhKiemClass">@hanhKiemText</span></td>
+        </tr>
+    }
+}
+else
+{
+    <tr>
+        <td colspan="6" style="text-align: center; color: #999; padding: 20px;">Không có dữ liệu</td>
+    </tr>
+}
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,209 @@
+@model List<QuanLyHocSinhTHPT.Models.HocSinh>
+
+@{
+    ViewData["Title"] = "Danh Sách Học Sinh";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/hocsinh-list.css">
+    <style>
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .navbar-brand {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <a href="/Dashboard" class="back-link">← Quay Lại Dashboard</a>
+        </div>
+        <div class="navbar-right">
+            <div class="user-info">
+                <span>👤 @ViewBag.HoTen</span>
+                <span class="badge">@ViewBag.Quyen</span>
+            </div>
+            <a href="/Login/DangXuat" class="logout-btn">Đăng Xuất</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>📚 Danh Sách Học Sinh</h1>
+            <p>Quản Lý Học Sinh Trường THPT</p>
+        </div>
+
+        <div class="content">
+            @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+            {
+                <div class="error-message">
+                    <strong>Lỗi:</strong> @ViewBag.ErrorMessage
+                </div>
+            }
+
+            @if (Model != null && Model.Count > 0)
+            {
+                <div class="stats">
+                    <div class="stat-card">
+                        <h3>@Model.Count</h3>
+                        <p>Tổng Số Học Sinh</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>@Model.Select(hs => hs.TenLop).Distinct().Count()</h3>
+                        <p>Số Lớp</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>@Model.Where(hs => hs.GioiTinh == "Nam").Count()</h3>
+                        <p>Nam</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>@Model.Where(hs => hs.GioiTinh == "Nữ").Count()</h3>
+                        <p>Nữ</p>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã HS</th>
+                            <th>Họ Tên</th>
+                            <th>Ngày Sinh</th>
+                            <th>Giới Tính</th>
+                            <th>Lớp</th>
+                            <th>Điểm TB</th>
+                            <th>Hành Kiểm</th>
+                            <th>Địa Chỉ</th>
+                            <th>SĐT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var hocSinh in Model)
+                        {
+                            <tr>
+                                <td>@hocSinh.MaHS</td>
+                                <td><strong>@hocSinh.HoTen</strong></td>
+                                <td>@hocSinh.NgaySinh?.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    @if (hocSinh.GioiTinh == "Nam")
+                                    {
+                                        <span class="badge badge-primary">👨 Nam</span>
+                                    }
+                                    else if (hocSinh.GioiTinh == "Nữ")
+                                    {
+                                        <span class="badge badge-primary">👩 Nữ</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@hocSinh.GioiTinh</span>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="badge badge-success">@hocSinh.TenLop</span>
+                                </td>
+                                <td>
+                                    @if (hocSinh.DiemTB.HasValue)
+                                    {
+                                        <strong>@hocSinh.DiemTB?.ToString("F2")</strong>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (hocSinh.HanhKiem == "Tốt")
+                                    {
+                                        <span class="badge badge-success">✓ Tốt</span>
+                                    }
+                                    else if (hocSinh.HanhKiem == "Khá")
+                                    {
+                                        <span class="badge badge-warning">△ Khá</span>
+                                    }
+                                    else if (hocSinh.HanhKiem == "Trung Bình")
+                                    {
+                                        <span class="badge badge-warning">△ TB</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@hocSinh.HanhKiem</span>
+                                    }
+                                </td>
+                                <td>@hocSinh.DiaChi</td>
+                                <td>@hocSinh.SDT</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="no-data">
+                    <p>📭 Không có dữ liệu học sinh</p>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

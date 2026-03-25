@@ -40,7 +40,7 @@ namespace QuanLyHocSinhTHPT.Services
                     NgaySinh = reader["NgaySinh"] == DBNull.Value ? null : Convert.ToDateTime(reader["NgaySinh"]),
                     GioiTinh = reader["GioiTinh"].ToString(),
                     DiaChi   = reader["DiaChi"].ToString(),
-                    SDT      = reader["SDT"].ToString(),
+                    SDT      = reader["SDT"] == DBNull.Value ? null : Convert.ToInt64(reader["SDT"]),
                     MaLop    = Convert.ToInt32(reader["MaLop"]),
                     TenLop   = reader["TenLop"].ToString(),
                     DiemTB   = reader["DiemTB"] == DBNull.Value ? null : Convert.ToDouble(reader["DiemTB"]),
@@ -80,11 +80,13 @@ namespace QuanLyHocSinhTHPT.Services
                     NgaySinh = reader["NgaySinh"] == DBNull.Value ? null : Convert.ToDateTime(reader["NgaySinh"]),
                     GioiTinh = reader["GioiTinh"].ToString(),
                     DiaChi   = reader["DiaChi"].ToString(),
-                    SDT      = reader["SDT"].ToString(),
+                    SDT      = reader["SDT"] == DBNull.Value ? null : Convert.ToInt64(reader["SDT"]),
                     MaLop    = Convert.ToInt32(reader["MaLop"]),
                     TenLop   = reader["TenLop"].ToString(),
                     DiemTB   = reader["DiemTB"] == DBNull.Value ? null : Convert.ToDouble(reader["DiemTB"]),
-                    HanhKiem = reader["HanhKiem"].ToString(),
+                    HanhKiem = reader["HanhKiem"] == DBNull.Value ? null : reader["HanhKiem"].ToString(),
+// Hiện tại thiếu null check cho HanhKiem — nếu DB trả về DBNull mà gọi .ToString() thì OK
+// nhưng nếu Oracle trả về kiểu khác thì có thể crash
                 });
             }
             return result;
@@ -117,11 +119,13 @@ namespace QuanLyHocSinhTHPT.Services
                     NgaySinh = reader["NgaySinh"] == DBNull.Value ? null : Convert.ToDateTime(reader["NgaySinh"]),
                     GioiTinh = reader["GioiTinh"].ToString(),
                     DiaChi   = reader["DiaChi"].ToString(),
-                    SDT      = reader["SDT"].ToString(),
+                    SDT      = reader["SDT"] == DBNull.Value ? null : Convert.ToInt64(reader["SDT"]),
                     MaLop    = Convert.ToInt32(reader["MaLop"]),
                     TenLop   = reader["TenLop"].ToString(),
                     DiemTB   = reader["DiemTB"] == DBNull.Value ? null : Convert.ToDouble(reader["DiemTB"]),
-                    HanhKiem = reader["HanhKiem"].ToString(),
+                    HanhKiem = reader["HanhKiem"] == DBNull.Value ? null : reader["HanhKiem"].ToString(),
+// Hiện tại thiếu null check cho HanhKiem — nếu DB trả về DBNull mà gọi .ToString() thì OK
+// nhưng nếu Oracle trả về kiểu khác thì có thể crash
                 };
             }
             return null;

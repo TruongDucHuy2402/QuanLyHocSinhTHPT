@@ -1,12 +1,1042 @@
 {
   "Version": 1,
-  "Hash": "4LmWB+3t+wMuYrowR9WUBFcUV/+zviwWcXqvD7mGBBc=",
+  "Hash": "48XLKY4w6bElLSEYsoZ3TI/0Be3xA460Ncnk96OGshs=",
   "Source": "QuanLyHocSinhTHPT",
   "BasePath": "_content/QuanLyHocSinhTHPT",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "QuanLyHocSinhTHPT\\wwwroot",
+      "Source": "QuanLyHocSinhTHPT",
+      "ContentRoot": "D:\\QuanLyHocSinhTHPT\\wwwroot\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\7whlqt7wy6-ypb83wpbou.gz",
+      "SourceId": "QuanLyHocSinhTHPT",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "RelativePath": "css/dashboard#[.{fingerprint=ypb83wpbou}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\dashboard.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "o4hra5o34v",
+      "Integrity": "eE1dXSmADmZtmSbbmuajRg953EBlX19rW7mIH0xyq7E=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\dashboard.css"
+    },
+    {
+      "Identity": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\vvnbco36qi-75nyh9yo4p.gz",
+      "SourceId": "QuanLyHocSinhTHPT",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "RelativePath": "css/hocsinh-list#[.{fingerprint=75nyh9yo4p}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\hocsinh-list.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "hf7aeclvc3",
+      "Integrity": "4y1UyvvDZzatt90zuahEO8GFZS1mWos6op6BJviiZN4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\hocsinh-list.css"
+    },
+    {
+      "Identity": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\xx4qmbixej-o4wk2suxou.gz",
+      "SourceId": "QuanLyHocSinhTHPT",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "RelativePath": "css/login#[.{fingerprint=o4wk2suxou}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\login.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "qx2tz73at8",
+      "Integrity": "HuOI1VAFiC1FVmb4lLMLupviaozBA/sSVDxGg0rxCso=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\login.css"
+    },
+    {
+      "Identity": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\dashboard.css",
+      "SourceId": "QuanLyHocSinhTHPT",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\QuanLyHocSinhTHPT\\wwwroot\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "RelativePath": "css/dashboard#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ypb83wpbou",
+      "Integrity": "VqDcYGynyvAnl8cUSWbzxT8d3JJ9MiXn7dIt9b6iz44=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\dashboard.css"
+    },
+    {
+      "Identity": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\hocsinh-list.css",
+      "SourceId": "QuanLyHocSinhTHPT",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\QuanLyHocSinhTHPT\\wwwroot\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "RelativePath": "css/hocsinh-list#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "75nyh9yo4p",
+      "Integrity": "qz4KUgfvmNFKSvQMpvanpWJRQ3AIb0zMQDTr58rt9wE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\hocsinh-list.css"
+    },
+    {
+      "Identity": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\login.css",
+      "SourceId": "QuanLyHocSinhTHPT",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\QuanLyHocSinhTHPT\\wwwroot\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "RelativePath": "css/login#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "o4wk2suxou",
+      "Integrity": "qDH2SUO62ZlZ4OqyCs4K8qr9cRq61S3lwrdawIZYXxw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\login.css"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "css/dashboard.css",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\7whlqt7wy6-ypb83wpbou.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000637755102"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1567"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eE1dXSmADmZtmSbbmuajRg953EBlX19rW7mIH0xyq7E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 06:33:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"VqDcYGynyvAnl8cUSWbzxT8d3JJ9MiXn7dIt9b6iz44=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VqDcYGynyvAnl8cUSWbzxT8d3JJ9MiXn7dIt9b6iz44="
+        }
+      ]
+    },
+    {
+      "Route": "css/dashboard.css",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\dashboard.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5899"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VqDcYGynyvAnl8cUSWbzxT8d3JJ9MiXn7dIt9b6iz44=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 06:33:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VqDcYGynyvAnl8cUSWbzxT8d3JJ9MiXn7dIt9b6iz44="
+        }
+      ]
+    },
+    {
+      "Route": "css/dashboard.css.gz",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\7whlqt7wy6-ypb83wpbou.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1567"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eE1dXSmADmZtmSbbmuajRg953EBlX19rW7mIH0xyq7E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 06:33:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-eE1dXSmADmZtmSbbmuajRg953EBlX19rW7mIH0xyq7E="
+        }
+      ]
+    },
+    {
+      "Route": "css/dashboard.ypb83wpbou.css",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\7whlqt7wy6-ypb83wpbou.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000637755102"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1567"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eE1dXSmADmZtmSbbmuajRg953EBlX19rW7mIH0xyq7E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 06:33:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"VqDcYGynyvAnl8cUSWbzxT8d3JJ9MiXn7dIt9b6iz44=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ypb83wpbou"
+        },
+        {
+          "Name": "label",
+          "Value": "css/dashboard.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VqDcYGynyvAnl8cUSWbzxT8d3JJ9MiXn7dIt9b6iz44="
+        }
+      ]
+    },
+    {
+      "Route": "css/dashboard.ypb83wpbou.css",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\dashboard.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5899"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VqDcYGynyvAnl8cUSWbzxT8d3JJ9MiXn7dIt9b6iz44=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 06:33:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ypb83wpbou"
+        },
+        {
+          "Name": "label",
+          "Value": "css/dashboard.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VqDcYGynyvAnl8cUSWbzxT8d3JJ9MiXn7dIt9b6iz44="
+        }
+      ]
+    },
+    {
+      "Route": "css/dashboard.ypb83wpbou.css.gz",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\7whlqt7wy6-ypb83wpbou.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1567"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eE1dXSmADmZtmSbbmuajRg953EBlX19rW7mIH0xyq7E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 06:33:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ypb83wpbou"
+        },
+        {
+          "Name": "label",
+          "Value": "css/dashboard.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eE1dXSmADmZtmSbbmuajRg953EBlX19rW7mIH0xyq7E="
+        }
+      ]
+    },
+    {
+      "Route": "css/hocsinh-list.75nyh9yo4p.css",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\vvnbco36qi-75nyh9yo4p.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001138952164"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "877"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4y1UyvvDZzatt90zuahEO8GFZS1mWos6op6BJviiZN4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 05:33:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"qz4KUgfvmNFKSvQMpvanpWJRQ3AIb0zMQDTr58rt9wE=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "75nyh9yo4p"
+        },
+        {
+          "Name": "label",
+          "Value": "css/hocsinh-list.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qz4KUgfvmNFKSvQMpvanpWJRQ3AIb0zMQDTr58rt9wE="
+        }
+      ]
+    },
+    {
+      "Route": "css/hocsinh-list.75nyh9yo4p.css",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\hocsinh-list.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2613"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qz4KUgfvmNFKSvQMpvanpWJRQ3AIb0zMQDTr58rt9wE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 05:33:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "75nyh9yo4p"
+        },
+        {
+          "Name": "label",
+          "Value": "css/hocsinh-list.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qz4KUgfvmNFKSvQMpvanpWJRQ3AIb0zMQDTr58rt9wE="
+        }
+      ]
+    },
+    {
+      "Route": "css/hocsinh-list.75nyh9yo4p.css.gz",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\vvnbco36qi-75nyh9yo4p.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "877"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4y1UyvvDZzatt90zuahEO8GFZS1mWos6op6BJviiZN4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 05:33:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "75nyh9yo4p"
+        },
+        {
+          "Name": "label",
+          "Value": "css/hocsinh-list.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4y1UyvvDZzatt90zuahEO8GFZS1mWos6op6BJviiZN4="
+        }
+      ]
+    },
+    {
+      "Route": "css/hocsinh-list.css",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\vvnbco36qi-75nyh9yo4p.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001138952164"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "877"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4y1UyvvDZzatt90zuahEO8GFZS1mWos6op6BJviiZN4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 05:33:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"qz4KUgfvmNFKSvQMpvanpWJRQ3AIb0zMQDTr58rt9wE=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qz4KUgfvmNFKSvQMpvanpWJRQ3AIb0zMQDTr58rt9wE="
+        }
+      ]
+    },
+    {
+      "Route": "css/hocsinh-list.css",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\hocsinh-list.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2613"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qz4KUgfvmNFKSvQMpvanpWJRQ3AIb0zMQDTr58rt9wE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 05:33:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qz4KUgfvmNFKSvQMpvanpWJRQ3AIb0zMQDTr58rt9wE="
+        }
+      ]
+    },
+    {
+      "Route": "css/hocsinh-list.css.gz",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\vvnbco36qi-75nyh9yo4p.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "877"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4y1UyvvDZzatt90zuahEO8GFZS1mWos6op6BJviiZN4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 05:33:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4y1UyvvDZzatt90zuahEO8GFZS1mWos6op6BJviiZN4="
+        }
+      ]
+    },
+    {
+      "Route": "css/login.css",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\xx4qmbixej-o4wk2suxou.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001308900524"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "763"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"HuOI1VAFiC1FVmb4lLMLupviaozBA/sSVDxGg0rxCso=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 06:03:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"qDH2SUO62ZlZ4OqyCs4K8qr9cRq61S3lwrdawIZYXxw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qDH2SUO62ZlZ4OqyCs4K8qr9cRq61S3lwrdawIZYXxw="
+        }
+      ]
+    },
+    {
+      "Route": "css/login.css",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\login.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2214"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qDH2SUO62ZlZ4OqyCs4K8qr9cRq61S3lwrdawIZYXxw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 06:03:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qDH2SUO62ZlZ4OqyCs4K8qr9cRq61S3lwrdawIZYXxw="
+        }
+      ]
+    },
+    {
+      "Route": "css/login.css.gz",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\xx4qmbixej-o4wk2suxou.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "763"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"HuOI1VAFiC1FVmb4lLMLupviaozBA/sSVDxGg0rxCso=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 06:03:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-HuOI1VAFiC1FVmb4lLMLupviaozBA/sSVDxGg0rxCso="
+        }
+      ]
+    },
+    {
+      "Route": "css/login.o4wk2suxou.css",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\xx4qmbixej-o4wk2suxou.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001308900524"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "763"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"HuOI1VAFiC1FVmb4lLMLupviaozBA/sSVDxGg0rxCso=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 06:03:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"qDH2SUO62ZlZ4OqyCs4K8qr9cRq61S3lwrdawIZYXxw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "o4wk2suxou"
+        },
+        {
+          "Name": "label",
+          "Value": "css/login.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qDH2SUO62ZlZ4OqyCs4K8qr9cRq61S3lwrdawIZYXxw="
+        }
+      ]
+    },
+    {
+      "Route": "css/login.o4wk2suxou.css",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\login.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2214"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qDH2SUO62ZlZ4OqyCs4K8qr9cRq61S3lwrdawIZYXxw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 06:03:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "o4wk2suxou"
+        },
+        {
+          "Name": "label",
+          "Value": "css/login.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qDH2SUO62ZlZ4OqyCs4K8qr9cRq61S3lwrdawIZYXxw="
+        }
+      ]
+    },
+    {
+      "Route": "css/login.o4wk2suxou.css.gz",
+      "AssetFile": "D:\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\xx4qmbixej-o4wk2suxou.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "763"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"HuOI1VAFiC1FVmb4lLMLupviaozBA/sSVDxGg0rxCso=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Mar 2026 06:03:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "o4wk2suxou"
+        },
+        {
+          "Name": "label",
+          "Value": "css/login.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-HuOI1VAFiC1FVmb4lLMLupviaozBA/sSVDxGg0rxCso="
+        }
+      ]
+    }
+  ]
 }

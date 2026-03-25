@@ -10,9 +10,9 @@ namespace QuanLyHocSinhTHPT.Controllers
     {
         private readonly HocSinhService _service;
 
-        public HocSinhController(string connectionString)
+        public HocSinhController(HocSinhService service)  // ✅ thay string bằng HocSinhService
         {
-            _service = new HocSinhService(connectionString);
+            _service = service;
         }
 
         // GET /api/hocsinh
