@@ -201,9 +201,9 @@ namespace QuanLyHocSinhTHPT.Controllers
                 var diemTheoMon = _hocSinhService.GetDiemTBTheoMon(maLop.Value, hocKy, namHoc);
                 System.Diagnostics.Debug.WriteLine($"📌 Found {diemTheoMon.Count} subjects with scores");
                 
-                // Lấy danh sách học sinh để hiển thị thống kê
-                var danhSachHocSinh = _hocSinhService.GetHocSinhTheoLop(maLop.Value);
-                System.Diagnostics.Debug.WriteLine($"📌 Found {danhSachHocSinh.Count} students in class");
+                // Lấy danh sách học sinh với điểm TB theo học kỳ
+                var danhSachHocSinh = _hocSinhService.GetHocSinhTheoLopWithDiem(maLop.Value, hocKy, namHoc);
+                System.Diagnostics.Debug.WriteLine($"📌 Found {danhSachHocSinh.Count} students in class with DiemTB");
 
                 ViewBag.DiemTheoMon = diemTheoMon;
                 ViewBag.DanhSachHocSinh = danhSachHocSinh;
@@ -233,7 +233,7 @@ namespace QuanLyHocSinhTHPT.Controllers
 
         // GET: /Dashboard/ScoresBySubject
         [HttpGet]
-        public IActionResult ScoresBySubject(int maMon, string loaiDiem = "", int hocKy = 1, string namHoc = "2024-2025")
+        public IActionResult ScoresBySubject(int maMon, int? maLop = null, string loaiDiem = "", int hocKy = 1, string namHoc = "2024-2025")
         {
             if (!CheckLogin())
             {
@@ -244,21 +244,28 @@ namespace QuanLyHocSinhTHPT.Controllers
 
             try
             {
-                // Lấy MaLop từ session hoặc mặc định
-                int maLop = 1;
-                var maMaHsStr = HttpContext.Session.GetString("MaHS");
-                if (!string.IsNullOrEmpty(maMaHsStr) && int.TryParse(maMaHsStr, out int maHS))
+                // If maLop not provided in URL, get from session or default
+                if (!maLop.HasValue)
                 {
-                    var student = _hocSinhService.GetHocSinhById(maHS);
-                    maLop = student?.MaLop ?? 1;
+                    var maMaHsStr = HttpContext.Session.GetString("MaHS");
+                    if (!string.IsNullOrEmpty(maMaHsStr) && int.TryParse(maMaHsStr, out int maHS))
+                    {
+                        var student = _hocSinhService.GetHocSinhById(maHS);
+                        maLop = student?.MaLop ?? 1;
+                    }
+                    else
+                    {
+                        maLop = 1;
+                    }
                 }
 
                 // Lấy điểm theo môn
-                var diemTheoMon = _hocSinhService.GetDiemTBTheoMon(maLop, hocKy, namHoc);
+                var diemTheoMon = _hocSinhService.GetDiemTBTheoMon(maLop.Value, hocKy, namHoc);
                 var diemMon = diemTheoMon.FirstOrDefault(d => d.MaMon == maMon);
 
-                ViewBag.DiemTheoMon = diemMon != null ? new List<dynamic> { diemMon } : new List<dynamic>();
+                ViewBag.DiemTheoMon = diemMon != null ? new List<DiemMonTBResult> { diemMon } : new List<DiemMonTBResult>();
                 ViewBag.DanhSachMon = diemTheoMon;
+                ViewBag.MaLop = maLop.Value;
                 ViewBag.MaMon = maMon;
                 ViewBag.LoaiDiem = loaiDiem;
                 ViewBag.HocKy = hocKy;
@@ -273,6 +280,21 @@ namespace QuanLyHocSinhTHPT.Controllers
             }
         }
 
+        // GET: /Dashboard/GetSubjects - API endpoint để lấy danh sách môn học
+        [HttpGet]
+        public IActionResult GetSubjects()
+        {
+            try
+            {
+                var danhSachMon = _hocSinhService.GetDanhSachMonHoc();
+                return Json(danhSachMon);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message });
+            }
+        }
+
         // GET: /Dashboard/TestScores - DEBUG ONLY
         [HttpGet]
         public IActionResult TestScores()
@@ -284,6 +306,60 @@ namespace QuanLyHocSinhTHPT.Controllers
 
             var diagnostics = _hocSinhService.GetDiemDiagnostics();
             return Json(diagnostics);
+        }
+
+        // GET: /Dashboard/GetScoreDistribution - API endpoint để lấy phân bố điểm
+        [HttpGet]
+        public IActionResult GetScoreDistribution(int maLop, int maMon, int hocKy = 1, string namHoc = "2024-2025", string? loaiDiem = null)
+        {
+            try
+            {
+                // Map loaiDiem value to actual DB value if needed
+                string? dbLoaiDiem = null;
+                if (!string.IsNullOrEmpty(loaiDiem) && loaiDiem != "")
+                {
+                    // Convert "15" -> "15 phút", "45" -> "45 phút", "112" -> "Thi Học Kỳ"
+                    switch (loaiDiem)
+                    {
+                        case "15":
+                            dbLoaiDiem = "15 phút";
+                            break;
+                        case "45":
+                            dbLoaiDiem = "45 phút";
+                            break;
+                        case "112":
+                            dbLoaiDiem = "Thi Học Kỳ";
+                            break;
+                        default:
+                            dbLoaiDiem = loaiDiem;
+                            break;
+                    }
+                }
+
+                System.Diagnostics.Debug.WriteLine($"📌 GetScoreDistribution: maLop={maLop}, maMon={maMon}, loaiDiem={loaiDiem}, dbLoaiDiem={dbLoaiDiem}");
+
+                var distribution = _hocSinhService.GetScoreDistribution(maLop, maMon, hocKy, namHoc, dbLoaiDiem);
+                return Json(distribution);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message });
+            }
+        }
+
+        // GET: /Dashboard/DebugScores - Debug endpoint
+        [HttpGet]
+        public IActionResult DebugScores(int maLop = 4, int maMon = 1)
+        {
+            try
+            {
+                var diagnostics = _hocSinhService.GetDiemDiagnostics();
+                return Json(diagnostics);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message });
+            }
         }
     }
 }

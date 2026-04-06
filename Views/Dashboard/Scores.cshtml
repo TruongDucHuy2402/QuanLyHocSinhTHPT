@@ -17,7 +17,7 @@
 
     <!-- DEBUG INFO -->
     <div style="background: #f0f7ff; border: 1px solid #0066cc; padding: 10px; margin-bottom: 15px; border-radius: 4px; font-size: 0.85rem;">
-        <strong>🔍 Debug Info:</strong> Lớp: @ViewBag.DebugMaLop | HK: @ViewBag.DebugHocKy | NH: @ViewBag.DebugNamHoc | 
+        <strong>🔍 Thông tin:</strong> Lớp: @ViewBag.DebugMaLop | HK: @ViewBag.DebugHocKy | NH: @ViewBag.DebugNamHoc | 
         📊 @ViewBag.TongMon màn | 👥 @ViewBag.TongHocSinh HS
     </div>
 
@@ -111,7 +111,7 @@
                                     </div>
                                 </td>
                                 <td style="text-align: center;">
-                                    <a href="/Dashboard/ScoresBySubject?maMon=@item.MaMon" class="btn-detail" title="Xem chi tiết">
+                                    <a href="/Dashboard/ScoresBySubject?maMon=@item.MaMon&maLop=@ViewBag.MaLop" class="btn-detail" title="Xem chi tiết">
                                         📊
                                     </a>
                                 </td>

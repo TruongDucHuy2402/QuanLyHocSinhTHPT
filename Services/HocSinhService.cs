@@ -51,7 +51,7 @@ namespace QuanLyHocSinhTHPT.Services
             string sql = @"
                 SELECT hs.MaHS, hs.HoTen, hs.NgaySinh, hs.GioiTinh,
                        hs.DiaChi, hs.SDT, hs.MaLop, lh.TenLop,
-                       hs.DiemTB, hs.HanhKiem
+                       hs.HanhKiem
                 FROM HOC_SINH hs
                 JOIN LOP_HOC lh ON hs.MaLop = lh.MaLop
                 WHERE hs.MaLop = :maLop
@@ -63,7 +63,61 @@ namespace QuanLyHocSinhTHPT.Services
             using var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                result.Add(MapHocSinh(reader));
+                var hs = new HocSinh
+                {
+                    MaHS     = Convert.ToInt32(reader["MaHS"]),
+                    HoTen    = reader["HoTen"]?.ToString() ?? "",
+                    NgaySinh = reader["NgaySinh"] == DBNull.Value ? null : Convert.ToDateTime(reader["NgaySinh"]),
+                    GioiTinh = reader["GioiTinh"]?.ToString() ?? "",
+                    DiaChi   = reader["DiaChi"]?.ToString() ?? "",
+                    SDT      = reader["SDT"] == DBNull.Value ? null : Convert.ToInt64(reader["SDT"]),
+                    MaLop    = reader["MaLop"] == DBNull.Value ? null : Convert.ToInt32(reader["MaLop"]),
+                    TenLop   = reader["TenLop"]?.ToString() ?? "",
+                    HanhKiem = reader["HanhKiem"] == DBNull.Value ? "" : reader["HanhKiem"]?.ToString() ?? ""
+                };
+                // Calculate DiemTB from actual scores
+                hs.DiemTB = TinhDiemTBHK(hs.MaHS, 1, "2024-2025");
+                result.Add(hs);
+            }
+            return result;
+        }
+
+        public List<HocSinh> GetHocSinhTheoLopWithDiem(int maLop, int hocKy, string namHoc)
+        {
+            var result = new List<HocSinh>();
+            using var conn = new OracleConnection(_connectionString);
+            conn.Open();
+
+            string sql = @"
+                SELECT hs.MaHS, hs.HoTen, hs.NgaySinh, hs.GioiTinh,
+                       hs.DiaChi, hs.SDT, hs.MaLop, lh.TenLop,
+                       hs.HanhKiem
+                FROM HOC_SINH hs
+                JOIN LOP_HOC lh ON hs.MaLop = lh.MaLop
+                WHERE hs.MaLop = :maLop
+                ORDER BY hs.HoTen";
+
+            using var cmd = new OracleCommand(sql, conn);
+            cmd.Parameters.Add("maLop", OracleDbType.Int32).Value = maLop;
+
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                var hs = new HocSinh
+                {
+                    MaHS     = Convert.ToInt32(reader["MaHS"]),
+                    HoTen    = reader["HoTen"]?.ToString() ?? "",
+                    NgaySinh = reader["NgaySinh"] == DBNull.Value ? null : Convert.ToDateTime(reader["NgaySinh"]),
+                    GioiTinh = reader["GioiTinh"]?.ToString() ?? "",
+                    DiaChi   = reader["DiaChi"]?.ToString() ?? "",
+                    SDT      = reader["SDT"] == DBNull.Value ? null : Convert.ToInt64(reader["SDT"]),
+                    MaLop    = reader["MaLop"] == DBNull.Value ? null : Convert.ToInt32(reader["MaLop"]),
+                    TenLop   = reader["TenLop"]?.ToString() ?? "",
+                    HanhKiem = reader["HanhKiem"] == DBNull.Value ? "" : reader["HanhKiem"]?.ToString() ?? ""
+                };
+                // Calculate DiemTB from actual scores for specified semester
+                hs.DiemTB = TinhDiemTBHK(hs.MaHS, hocKy, namHoc);
+                result.Add(hs);
             }
             return result;
         }
@@ -422,6 +476,36 @@ namespace QuanLyHocSinhTHPT.Services
             return list;
         }
 
+        // ── 10. GET ALL SUBJECTS (DANH SÁCH MÔN HỌC) ──
+        public List<MonHoc> GetDanhSachMonHoc()
+        {
+            var list = new List<MonHoc>();
+            using var conn = new OracleConnection(_connectionString);
+            conn.Open();
+
+            string sql = @"
+                SELECT 
+                    MaMon,
+                    TenMon,
+                    SoTiet
+                FROM MON_HOC
+                ORDER BY TenMon";
+
+            using var cmd = new OracleCommand(sql, conn);
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                list.Add(new MonHoc
+                {
+                    MaMon = Convert.ToInt32(reader["MaMon"]),
+                    TenMon = reader["TenMon"]?.ToString() ?? "",
+                    SoTiet = reader["SoTiet"] == DBNull.Value ? 0 : Convert.ToInt32(reader["SoTiet"])
+                });
+            }
+            return list;
+        }
+
         // ── Helper: Classify Score ──────────────────────
         private static string ClassifyScore(float? diem)
         {
@@ -490,6 +574,83 @@ namespace QuanLyHocSinhTHPT.Services
             }
 
             return result;
+        }
+
+        // ── 11. GET SCORE DISTRIBUTION (PHÂN BỐ ĐIỂM THEO MỨC ĐỘ) ──
+        public ScoreDistributionResult GetScoreDistribution(int maLop, int maMon, int hocKy, string namHoc, string? loaiDiem = null)
+        {
+            using var conn = new OracleConnection(_connectionString);
+            conn.Open();
+
+            try
+            {
+                // Get the average score per student & subject, filtered by LoaiDiem if provided
+                string sql = @"
+                    SELECT 
+                        bd.MaHS,
+                        ROUND(AVG(bd.SoDiem), 2) as DiemTB_Mon
+                    FROM BANG_DIEM bd
+                    INNER JOIN HOC_SINH hs ON bd.MaHS = hs.MaHS
+                    WHERE hs.MaLop  = :maLop
+                      AND bd.MaMon  = :maMon
+                      AND bd.HocKy  = :hocKy
+                      AND bd.NamHoc = :namHoc";
+
+                if (!string.IsNullOrEmpty(loaiDiem) && loaiDiem != "")
+                {
+                    sql += " AND bd.LoaiDiem = :loaiDiem";
+                }
+
+                sql += @"
+                    GROUP BY bd.MaHS
+                    ORDER BY DiemTB_Mon DESC";
+
+                using var cmd = new OracleCommand(sql, conn);
+                cmd.Parameters.Add("maLop",  OracleDbType.Int32).Value    = maLop;
+                cmd.Parameters.Add("maMon",  OracleDbType.Int32).Value    = maMon;
+                cmd.Parameters.Add("hocKy",  OracleDbType.Int32).Value    = hocKy;
+                cmd.Parameters.Add("namHoc", OracleDbType.Varchar2).Value = namHoc;
+                
+                if (!string.IsNullOrEmpty(loaiDiem) && loaiDiem != "")
+                {
+                    cmd.Parameters.Add("loaiDiem", OracleDbType.Varchar2).Value = loaiDiem;
+                }
+
+                var scores = new List<float>();
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (reader["DiemTB_Mon"] != DBNull.Value)
+                    {
+                        scores.Add(Convert.ToSingle(reader["DiemTB_Mon"]));
+                    }
+                }
+
+                System.Diagnostics.Debug.WriteLine($"📌 GetScoreDistribution: MaLop={maLop}, MaMon={maMon}, LoaiDiem={loaiDiem ?? "null"}, Scores Count={scores.Count}");
+                if (scores.Count > 0)
+                {
+                    System.Diagnostics.Debug.WriteLine($"   Scores: Min={scores.Min()}, Max={scores.Max()}, Avg={scores.Average()}");
+                }
+
+                var result = new ScoreDistributionResult
+                {
+                    TongHocSinh = scores.Count,
+                    MaxScore = scores.Count > 0 ? scores.Max() : 0,
+                    MinScore = scores.Count > 0 ? scores.Min() : 0,
+                    AvgScore = scores.Count > 0 ? (float)scores.Average() : 0,
+                    SoGioi = scores.Count(s => s >= 8.0f),
+                    SoKha = scores.Count(s => s >= 6.5f && s < 8.0f),
+                    SoTrungBinh = scores.Count(s => s >= 5.0f && s < 6.5f),
+                    SoYeu = scores.Count(s => s < 5.0f)
+                };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"❌ GetScoreDistribution Error: {ex.Message}\n{ex.StackTrace}");
+                return new ScoreDistributionResult();
+            }
         }
     }
 }
