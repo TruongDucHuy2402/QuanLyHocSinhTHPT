@@ -1,16 +1,24 @@
 {
   "Files": [
     {
-      "Id": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\dashboard.css",
+      "Id": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\dashboard.css",
       "PackagePath": "staticwebassets\\css\\dashboard.css"
     },
     {
-      "Id": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\hocsinh-list.css",
+      "Id": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\hocsinh-list.css",
       "PackagePath": "staticwebassets\\css\\hocsinh-list.css"
     },
     {
-      "Id": "D:\\QuanLyHocSinhTHPT\\wwwroot\\css\\login.css",
+      "Id": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\login.css",
       "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\scores.css",
+      "PackagePath": "staticwebassets\\css\\scores.css"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\tables.css",
+      "PackagePath": "staticwebassets\\css\\tables.css"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.QuanLyHocSinhTHPT.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

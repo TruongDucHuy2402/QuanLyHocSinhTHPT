@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using QuanLyHocSinhTHPT.Models;
 using QuanLyHocSinhTHPT.Services;
 
 namespace QuanLyHocSinhTHPT.Controllers
@@ -6,13 +7,13 @@ namespace QuanLyHocSinhTHPT.Controllers
     public class DashboardController : Controller
     {
         private readonly HocSinhService _hocSinhService;
-        private readonly IConfiguration _configuration;
 
-        public DashboardController(IConfiguration configuration)
+        /// <summary>
+        /// ✅ Fix: Sử dụng DI để inject HocSinhService thay vì tạo manual
+        /// </summary>
+        public DashboardController(HocSinhService hocSinhService)
         {
-            _configuration = configuration;
-            var connectionString = configuration.GetConnectionString("OracleDB");
-            _hocSinhService = new HocSinhService(connectionString);
+            _hocSinhService = hocSinhService;
         }
 
         private bool CheckLogin()
@@ -81,6 +82,29 @@ namespace QuanLyHocSinhTHPT.Controllers
             }
         }
 
+        // GET: /Dashboard/Classes
+        [HttpGet]
+        public IActionResult Classes()
+        {
+            if (!CheckLogin() || (HttpContext.Session.GetString("VaiTro") != "ADMIN" && 
+                HttpContext.Session.GetString("VaiTro") != "BGH"))
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            SetViewBagData();
+            try
+            {
+                var danhSachLop = _hocSinhService.GetDanhSachLopHoc();
+                return View(danhSachLop);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = $"Có lỗi: {ex.Message}";
+                return View(new List<LopHoc>());
+            }
+        }
+
         // GET: /Dashboard/AddStudent
         [HttpGet]
         public IActionResult AddStudent()
@@ -141,16 +165,201 @@ namespace QuanLyHocSinhTHPT.Controllers
 
         // GET: /Dashboard/Scores
         [HttpGet]
-        public IActionResult Scores()
+        public IActionResult Scores(int? maLop = null, int hocKy = 1, string namHoc = "2024-2025")
         {
-            if (!CheckLogin() || (HttpContext.Session.GetString("VaiTro") != "HOCSINH" && 
-                HttpContext.Session.GetString("VaiTro") != "PHUHUYNH"))
+            if (!CheckLogin())
             {
                 return RedirectToAction("Index", "Login");
             }
 
             SetViewBagData();
-            return View();
+
+            try
+            {
+                // Nếu không có maLop, lấy từ session người dùng hiện tại
+                if (!maLop.HasValue)
+                {
+                    var maMaHsStr = HttpContext.Session.GetString("MaHS");
+                    System.Diagnostics.Debug.WriteLine($"📌 Session MaHS: {maMaHsStr}");
+                    
+                    if (!string.IsNullOrEmpty(maMaHsStr) && int.TryParse(maMaHsStr, out int maHS))
+                    {
+                        var student = _hocSinhService.GetHocSinhById(maHS);
+                        maLop = student?.MaLop ?? 1;
+                        System.Diagnostics.Debug.WriteLine($"📌 Student MaHS={maHS}, MaLop={maLop}");
+                    }
+                    else
+                    {
+                        maLop = 1; // Mặc định
+                        System.Diagnostics.Debug.WriteLine($"📌 No MaHS in session, using default MaLop=1");
+                    }
+                }
+
+                System.Diagnostics.Debug.WriteLine($"📌 Getting scores for: MaLop={maLop}, HocKy={hocKy}, NamHoc={namHoc}");
+
+                // Lấy danh sách điểm trung bình theo môn
+                var diemTheoMon = _hocSinhService.GetDiemTBTheoMon(maLop.Value, hocKy, namHoc);
+                System.Diagnostics.Debug.WriteLine($"📌 Found {diemTheoMon.Count} subjects with scores");
+                
+                // Lấy danh sách học sinh với điểm TB theo học kỳ
+                var danhSachHocSinh = _hocSinhService.GetHocSinhTheoLopWithDiem(maLop.Value, hocKy, namHoc);
+                System.Diagnostics.Debug.WriteLine($"📌 Found {danhSachHocSinh.Count} students in class with DiemTB");
+
+                ViewBag.DiemTheoMon = diemTheoMon;
+                ViewBag.DanhSachHocSinh = danhSachHocSinh;
+                ViewBag.MaLop = maLop;
+                ViewBag.HocKy = hocKy;
+                ViewBag.NamHoc = namHoc;
+                ViewBag.TongHocSinh = danhSachHocSinh.Count;
+                ViewBag.TongMon = diemTheoMon.Count;
+                ViewBag.DiemTBChung = diemTheoMon.Count > 0 
+                    ? diemTheoMon.Average(d => d.DiemTB_Mon ?? 0).ToString("F2") 
+                    : "0.00";
+                
+                // Debug info for diagnosis
+                ViewBag.DebugMaLop = maLop.Value;
+                ViewBag.DebugHocKy = hocKy;
+                ViewBag.DebugNamHoc = namHoc;
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"❌ Scores Error: {ex.Message}\n{ex.StackTrace}");
+                ViewBag.ErrorMessage = $"Có lỗi: {ex.Message}";
+                return View();
+            }
+        }
+
+        // GET: /Dashboard/ScoresBySubject
+        [HttpGet]
+        public IActionResult ScoresBySubject(int maMon, int? maLop = null, string loaiDiem = "", int hocKy = 1, string namHoc = "2024-2025")
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            SetViewBagData();
+
+            try
+            {
+                // If maLop not provided in URL, get from session or default
+                if (!maLop.HasValue)
+                {
+                    var maMaHsStr = HttpContext.Session.GetString("MaHS");
+                    if (!string.IsNullOrEmpty(maMaHsStr) && int.TryParse(maMaHsStr, out int maHS))
+                    {
+                        var student = _hocSinhService.GetHocSinhById(maHS);
+                        maLop = student?.MaLop ?? 1;
+                    }
+                    else
+                    {
+                        maLop = 1;
+                    }
+                }
+
+                // Lấy điểm theo môn
+                var diemTheoMon = _hocSinhService.GetDiemTBTheoMon(maLop.Value, hocKy, namHoc);
+                var diemMon = diemTheoMon.FirstOrDefault(d => d.MaMon == maMon);
+
+                ViewBag.DiemTheoMon = diemMon != null ? new List<DiemMonTBResult> { diemMon } : new List<DiemMonTBResult>();
+                ViewBag.DanhSachMon = diemTheoMon;
+                ViewBag.MaLop = maLop.Value;
+                ViewBag.MaMon = maMon;
+                ViewBag.LoaiDiem = loaiDiem;
+                ViewBag.HocKy = hocKy;
+                ViewBag.NamHoc = namHoc;
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = $"Có lỗi: {ex.Message}";
+                return View();
+            }
+        }
+
+        // GET: /Dashboard/GetSubjects - API endpoint để lấy danh sách môn học
+        [HttpGet]
+        public IActionResult GetSubjects()
+        {
+            try
+            {
+                var danhSachMon = _hocSinhService.GetDanhSachMonHoc();
+                return Json(danhSachMon);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message });
+            }
+        }
+
+        // GET: /Dashboard/TestScores - DEBUG ONLY
+        [HttpGet]
+        public IActionResult TestScores()
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            var diagnostics = _hocSinhService.GetDiemDiagnostics();
+            return Json(diagnostics);
+        }
+
+        // GET: /Dashboard/GetScoreDistribution - API endpoint để lấy phân bố điểm
+        [HttpGet]
+        public IActionResult GetScoreDistribution(int maLop, int maMon, int hocKy = 1, string namHoc = "2024-2025", string? loaiDiem = null)
+        {
+            try
+            {
+                // Map loaiDiem value to actual DB value if needed
+                string? dbLoaiDiem = null;
+                if (!string.IsNullOrEmpty(loaiDiem) && loaiDiem != "")
+                {
+                    // Convert "15" -> "15 phút", "45" -> "45 phút", "112" -> "Thi Học Kỳ"
+                    switch (loaiDiem)
+                    {
+                        case "15":
+                            dbLoaiDiem = "15 phút";
+                            break;
+                        case "45":
+                            dbLoaiDiem = "45 phút";
+                            break;
+                        case "112":
+                            dbLoaiDiem = "Thi Học Kỳ";
+                            break;
+                        default:
+                            dbLoaiDiem = loaiDiem;
+                            break;
+                    }
+                }
+
+                System.Diagnostics.Debug.WriteLine($"📌 GetScoreDistribution: maLop={maLop}, maMon={maMon}, loaiDiem={loaiDiem}, dbLoaiDiem={dbLoaiDiem}");
+
+                var distribution = _hocSinhService.GetScoreDistribution(maLop, maMon, hocKy, namHoc, dbLoaiDiem);
+                return Json(distribution);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message });
+            }
+        }
+
+        // GET: /Dashboard/DebugScores - Debug endpoint
+        [HttpGet]
+        public IActionResult DebugScores(int maLop = 4, int maMon = 1)
+        {
+            try
+            {
+                var diagnostics = _hocSinhService.GetDiemDiagnostics();
+                return Json(diagnostics);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message });
+            }
         }
     }
 }

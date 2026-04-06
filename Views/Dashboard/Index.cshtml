@@ -35,3 +35,40 @@
         <div class="stat-label">Học Sinh Nữ</div>
     </div>
 </div>
+
+<!-- Scores Section -->
+@if (ViewBag.VaiTro == "HOCSINH" || ViewBag.VaiTro == "PHUHUYNH" || ViewBag.VaiTro == "GVCN" || ViewBag.VaiTro == "ADMIN" || ViewBag.VaiTro == "BGH")
+{
+    <div style="margin-top: 30px;">
+        <div class="panel-title">📊 Điểm Số</div>
+        <div class="quick-access" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; padding: 20px;">
+            <a href="/Dashboard/Scores" class="quick-link" style="padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 8px; text-align: center; font-weight: 600; transition: transform 0.3s ease;">
+                📈 Xem Điểm Học Kỳ
+            </a>
+            @if (ViewBag.VaiTro == "GVCN" || ViewBag.VaiTro == "ADMIN" || ViewBag.VaiTro == "BGH")
+            {
+                <a href="/Dashboard/Scores" class="quick-link" style="padding: 20px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; text-decoration: none; border-radius: 8px; text-align: center; font-weight: 600; transition: transform 0.3s ease;">
+                    👥 Phân Tích Điểm Lớp
+                </a>
+            }
+        </div>
+        <p style="color: #999; font-size: 0.9rem; padding: 0 20px;">Quản lý và xem chi tiết điểm số học sinh</p>
+    </div>
+}
+
+<!-- Classes Section -->
+@if (ViewBag.VaiTro == "ADMIN" || ViewBag.VaiTro == "BGH")
+{
+    <div style="margin-top: 30px;">
+        <div class="panel-title">📚 Danh Sách Lớp Học</div>
+        <div class="quick-access" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; padding: 20px;">
+            <a href="/Dashboard/Classes" class="quick-link" style="padding: 20px; background: linear-gradient(135deg, #f59e0b 0%, #e74c3c 100%); color: white; text-decoration: none; border-radius: 8px; text-align: center; font-weight: 600; transition: transform 0.3s ease;">
+                📋 Xem Danh Sách Lớp
+            </a>
+            <a href="/Dashboard/Scores" class="quick-link" style="padding: 20px; background: linear-gradient(135deg, #8e44ad 0%, #3498db 100%); color: white; text-decoration: none; border-radius: 8px; text-align: center; font-weight: 600; transition: transform 0.3s ease;">
+                📊 Phân Tích Lớp Học
+            </a>
+        </div>
+        <p style="color: #999; font-size: 0.9rem; padding: 0 20px;">Quản lý lớp học và xem thống kê chi tiết</p>
+    </div>
+}

@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>ypb83wpbou</Fingerprint>
-      <Integrity>VqDcYGynyvAnl8cUSWbzxT8d3JJ9MiXn7dIt9b6iz44=</Integrity>
+      <Fingerprint>c0xmuduoeu</Fingerprint>
+      <Integrity>nGK7Upp8Y4g4wCwYIHs8ttrvaBgOLn9RxcTtbhNiro8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\dashboard.css'))</OriginalItemSpec>
@@ -30,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>75nyh9yo4p</Fingerprint>
-      <Integrity>qz4KUgfvmNFKSvQMpvanpWJRQ3AIb0zMQDTr58rt9wE=</Integrity>
+      <Fingerprint>jzjbscxazy</Fingerprint>
+      <Integrity>EeovN9Z4eGmQBJtj0OXZULh9d8Sm0lv7rtQcy49usN8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\hocsinh-list.css'))</OriginalItemSpec>
@@ -48,11 +48,47 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>o4wk2suxou</Fingerprint>
-      <Integrity>qDH2SUO62ZlZ4OqyCs4K8qr9cRq61S3lwrdawIZYXxw=</Integrity>
+      <Fingerprint>e8d4avs9tv</Fingerprint>
+      <Integrity>Ar4j33uYsMDlk1hv+dhpMbSJV2da2gTdWQnMvy8r8us=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\login.css'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\scores.css'))">
+      <SourceType>Package</SourceType>
+      <SourceId>QuanLyHocSinhTHPT</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/QuanLyHocSinhTHPT</BasePath>
+      <RelativePath>css/scores.css</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>ax3ygism17</Fingerprint>
+      <Integrity>XiBOAfW2HTFig/ZM/IIS2yoMuppRSgL16n2ClsYG7aU=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\scores.css'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\tables.css'))">
+      <SourceType>Package</SourceType>
+      <SourceId>QuanLyHocSinhTHPT</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/QuanLyHocSinhTHPT</BasePath>
+      <RelativePath>css/tables.css</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>70m8x2ty54</Fingerprint>
+      <Integrity>Z3qXevKiNLBl+Q+XlY6T9aZG+TrOyLleyrRMmBTXGE8=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\tables.css'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

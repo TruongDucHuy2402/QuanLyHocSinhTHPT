@@ -1,0 +1,155 @@
+@model List<QuanLyHocSinhTHPT.Models.HocSinh>
+
+@{
+    ViewData["Title"] = "Danh Sách Học Sinh";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/scores.css" />
+<link rel="stylesheet" href="~/css/tables.css" />
+
+<div class="scores-container">
+    <div class="panel-title">👥 Danh Sách Học Sinh - Lớp @ViewBag.LopHoc?.TenLop</div>
+
+    <!-- Navigation -->
+    <div class="filter-section">
+        <a href="/LopHoc" class="btn-primary">← Quay Lại Danh Sách Lớp</a>
+        <a href="/LopHoc/Scores/@ViewBag.MaLop" class="btn-primary" style="margin-left: 10px;">📊 Xem Điểm</a>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-section">
+        <div class="summary-card">
+            <div class="card-title">📚 Tên Lớp</div>
+            <div class="card-value" style="font-size: 1.2em;">@ViewBag.LopHoc?.TenLop</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">👥 Tổng Số Học Sinh</div>
+            <div class="card-value">@ViewBag.TongHocSinh</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">👨 Học Sinh Nam</div>
+            <div class="card-value">@ViewBag.LopHoc?.SoNam</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">👩 Học Sinh Nữ</div>
+            <div class="card-value">@ViewBag.LopHoc?.SoNu</div>
+        </div>
+    </div>
+
+    <!-- Students Table -->
+    <div class="table-wrapper">
+        <h3 class="section-title">📋 Danh Sách Chi Tiết Học Sinh</h3>
+        
+        @if (Model != null && Model.Count > 0)
+        {
+            <table class="scores-table">
+                <thead>
+                    <tr>
+                        <th class="col-stt">STT</th>
+                        <th style="width: 70px; text-align: center;">Mã HS</th>
+                        <th style="width: auto;">Họ Tên</th>
+                        <th style="width: 100px; text-align: center;">Ngày Sinh</th>
+                        <th style="width: 80px; text-align: center;">Giới Tính</th>
+                        <th style="width: 100px; text-align: center;">Điểm TB</th>
+                        <th style="width: 120px; text-align: center;">Hạnh Kiểm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int stt = 1;
+                        foreach (var hs in Model)
+                        {
+                            var gioiTinhText = hs.GioiTinh == "Nam" ? "👨 Nam" : "👩 Nữ";
+                            var hanhKiemClass = hs.HanhKiem == "Tốt" ? "badge-good"
+                                              : hs.HanhKiem == "Khá" ? "badge-notice"
+                                              : "badge-bad";
+                            var namSinh = hs.NgaySinh.HasValue ? hs.NgaySinh.Value.ToString("dd/MM/yyyy") : "N/A";
+
+                            <tr>
+                                <td class="col-stt">@stt</td>
+                                <td style="text-align: center; font-weight: 600;">@hs.MaHS</td>
+                                <td style="font-weight: 500;">@hs.HoTen</td>
+                                <td style="text-align: center;">@namSinh</td>
+                                <td style="text-align: center;">@gioiTinhText</td>
+                                <td style="text-align: center;">
+                                    @if (hs.DiemTB.HasValue)
+                                    {
+                                        @String.Format("{0:F2}", hs.DiemTB)
+                                    }
+                                    else
+                                    {
+                                        <text>---</text>
+                                    }
+                                </td>
+                                <td style="text-align: center;">
+                                    <span class="badge @hanhKiemClass">@(hs.HanhKiem ?? "Chưa xếp")</span>
+                                </td>
+                            </tr>
+                            stt++;
+                        }
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="no-data">
+                <p>Không có dữ liệu học sinh</p>
+            </div>
+        }
+    </div>
+
+    <!-- Gender Distribution -->
+    @{
+        var soNam = Model?.Count(hs => hs.GioiTinh == "Nam") ?? 0;
+        var soNu = Model?.Count(hs => hs.GioiTinh == "Nu") ?? 0;
+        var totalHS = (soNam + soNu);
+        
+        if (totalHS > 0)
+        {
+            var percentNam = (soNam * 100.0 / totalHS);
+            var percentNu = (soNu * 100.0 / totalHS);
+            
+            <div class="table-wrapper" style="margin-top: 30px;">
+                <h3 class="section-title">📊 Phân Bố Giới Tính</h3>
+                <table class="scores-table">
+                    <thead>
+                        <tr>
+                            <th>Giới Tính</th>
+                            <th style="width: 80px; text-align: center;">Số Lượng</th>
+                            <th style="width: 100px; text-align: center;">Phần Trăm</th>
+                            <th style="width: 150px;">Biểu Đồ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>👨 Nam</strong></td>
+                            <td style="text-align: center;">@soNam</td>
+                            <td style="text-align: center;">@String.Format("{0:F1}", percentNam)%</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: @String.Format("{0:F0}", percentNam)%; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+                                        @String.Format("{0:F0}", percentNam)%
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>👩 Nữ</strong></td>
+                            <td style="text-align: center;">@soNu</td>
+                            <td style="text-align: center;">@String.Format("{0:F1}", percentNu)%</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: @String.Format("{0:F0}", percentNu)%; background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
+                                        @String.Format("{0:F0}", percentNu)%
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+</div>

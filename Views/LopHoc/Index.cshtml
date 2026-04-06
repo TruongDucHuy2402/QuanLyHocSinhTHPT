@@ -1,0 +1,99 @@
+@model List<QuanLyHocSinhTHPT.Models.LopHoc>
+
+@{
+    ViewData["Title"] = "Danh Sách Lớp Học";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/scores.css" />
+<link rel="stylesheet" href="~/css/tables.css" />
+
+<div class="scores-container">
+    <div class="panel-title">📚 Danh Sách Lớp Học</div>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    <!-- Summary Cards -->
+    <div class="summary-section">
+        <div class="summary-card">
+            <div class="card-title">📚 Tổng Số Lớp</div>
+            <div class="card-value">@Model.Count</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">👥 Tổng Số Học Sinh</div>
+            <div class="card-value">@Model.Sum(l => l.SoHocSinh)</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">👨 Học Sinh Nam</div>
+            <div class="card-value">@Model.Sum(l => l.SoNam)</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">👩 Học Sinh Nữ</div>
+            <div class="card-value">@Model.Sum(l => l.SoNu)</div>
+        </div>
+    </div>
+
+    <!-- Classes Table -->
+    <div class="table-wrapper">
+        <h3 class="section-title">🏫 Danh Sách Chi Tiết</h3>
+        
+        @if (Model != null && Model.Count > 0)
+        {
+            <table class="scores-table">
+                <thead>
+                    <tr>
+                        <th class="col-stt">STT</th>
+                        <th style="width: 100px;">Mã Lớp</th>
+                        <th style="width: auto;">Tên Lớp</th>
+                        <th style="width: 80px;">Khối</th>
+                        <th style="width: 70px; text-align: center;">Tổng HS</th>
+                        <th style="width: 60px; text-align: center;">Nam</th>
+                        <th style="width: 60px; text-align: center;">Nữ</th>
+                        <th style="width: 150px; text-align: center;">Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int stt = 1;
+                        foreach (var lop in Model)
+                        {
+                            var css = lop.SoHocSinh > 40 ? "good" : lop.SoHocSinh > 30 ? "average" : "excellent";
+                            <tr class="score-row @css">
+                                <td class="col-stt" style="text-align: center;">@stt</td>
+                                <td style="text-align: center; font-weight: 600;">@lop.MaLop</td>
+                                <td style="font-weight: 600;">@lop.TenLop</td>
+                                <td style="text-align: center;">@lop.Khoi</td>
+                                <td style="text-align: center; font-weight: 600;">@lop.SoHocSinh</td>
+                                <td style="text-align: center;">@lop.SoNam</td>
+                                <td style="text-align: center;">@lop.SoNu</td>
+                                <td style="text-align: center;">
+                                    <a href="/LopHoc/Details/@lop.MaLop" class="btn-detail" title="Chi Tiết">
+                                        ℹ️
+                                    </a>
+                                    <a href="/LopHoc/Scores/@lop.MaLop" class="btn-detail" title="Điểm Số" style="margin: 0 3px;">
+                                        📊
+                                    </a>
+                                    <a href="/LopHoc/Students/@lop.MaLop" class="btn-detail" title="Học Sinh">
+                                        👥
+                                    </a>
+                                </td>
+                            </tr>
+                            stt++;
+                        }
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="no-data">
+                <p>Không có dữ liệu lớp học</p>
+            </div>
+        }
+    </div>
+</div>
