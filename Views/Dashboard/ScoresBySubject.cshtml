@@ -1,0 +1,197 @@
+@{
+    ViewData["Title"] = "Chi Tiết Điểm Theo Môn";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/scores.css" />
+<link rel="stylesheet" href="~/css/tables.css" />
+
+<div class="scores-container">
+    <div class="panel-title">📊 Chi Tiết Điểm Theo Từng Môn Học</div>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    <!-- Navigation Back -->
+    <div class="filter-section">
+        <a href="/Dashboard/Scores" class="btn-primary">← Quay Lại Trang Điểm</a>
+    </div>
+
+    <!-- Subject Selection -->
+    <div class="filter-section">
+        <div class="filter-group">
+            <label>Chọn Môn Học:</label>
+            <select id="monHoc" class="form-control" onchange="loadScoresBySubject()">
+                <option value="">-- Chọn Môn --</option>
+                @if (ViewBag.DanhSachMon != null)
+                {
+                    foreach (var mon in (List<dynamic>)ViewBag.DanhSachMon)
+                    {
+                        <option value="@mon.MaMon">@mon.TenMon</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Kiểu Điểm:</label>
+            <select id="loaiDiem" class="form-control" onchange="loadScoresBySubject()">
+                <option value="">-- Tất Cả --</option>
+                <option value="15">Điểm 15 phút</option>
+                <option value="45">Điểm 45 phút</option>
+                <option value="112">Thi Học Kỳ</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Statistics by Subject -->
+    @if (ViewBag.DiemTheoMon != null)
+    {
+        <div class="table-wrapper">
+            <h3 class="section-title">📈 Thống Kê Chung</h3>
+            <table class="scores-table">
+                <thead>
+                    <tr>
+                        <th>Tiêu Chí</th>
+                        <th>Giá Trị</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Điểm Cao Nhất</td>
+                        <td class="font-bold">
+                            @{
+                                var diemList = (List<QuanLyHocSinhTHPT.Models.DiemMonTBResult>)ViewBag.DiemTheoMon;
+                                var maxDiem = diemList.Count > 0 ? diemList.Max(d => d.DiemTB_Mon ?? 0) : 0;
+                                @String.Format("{0:F2}", maxDiem)
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Điểm Thấp Nhất</td>
+                        <td class="font-bold">
+                            @{
+                                var minDiem = diemList.Count > 0 ? diemList.Where(d => d.DiemTB_Mon.HasValue).Min(d => d.DiemTB_Mon ?? 0) : 0;
+                                @String.Format("{0:F2}", minDiem)
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Điểm Trung Bình</td>
+                        <td class="font-bold">
+                            @{
+                                var avgDiem = diemList.Count > 0 ? diemList.Average(d => d.DiemTB_Mon ?? 0) : 0;
+                                @String.Format("{0:F2}", avgDiem)
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <!-- Detailed Distribution Table -->
+    <div class="table-wrapper" style="margin-top: 30px;">
+        <h3 class="section-title">📋 Phân Bố Điểm Theo Mức Độ</h3>
+        <table class="scores-table">
+            <thead>
+                <tr>
+                    <th>Mức Độ</th>
+                    <th>Số Lượng HS</th>
+                    <th>% Số Lượng</th>
+                    <th>Biểu Đồ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var diemTheoMon = ViewBag.DiemTheoMon as List<QuanLyHocSinhTHPT.Models.DiemMonTBResult>;
+                    if (diemTheoMon != null && diemTheoMon.Count > 0)
+                    {
+                        var totalHS = diemTheoMon.First().TongHocSinh;
+                        var excellent = diemTheoMon.FirstOrDefault()?.SoHocSinhDat ?? 0;
+                        var good = totalHS - excellent; // Simplified
+
+                        <tr class="excellent">
+                            <td><strong>Giỏi (≥8.0)</strong></td>
+                            <td class="font-bold">@excellent</td>
+                            <td class="font-bold">@String.Format("{0:F1}", (excellent * 100.0 / totalHS))%</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: @String.Format("{0:F0}", excellent * 100.0 / totalHS)%">
+                                        @String.Format("{0:F0}", excellent * 100.0 / totalHS)%
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="good">
+                            <td><strong>Khá (6.5-7.9)</strong></td>
+                            <td class="font-bold">@good</td>
+                            <td class="font-bold">@String.Format("{0:F1}", (good * 100.0 / totalHS))%</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: @String.Format("{0:F0}", good * 100.0 / totalHS)%; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+                                        @String.Format("{0:F0}", good * 100.0 / totalHS)%
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                <tr class="average">
+                    <td><strong>Trung Bình (5.0-6.4)</strong></td>
+                    <td class="font-bold">5</td>
+                    <td class="font-bold">26.3%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 26.3%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                                26.3%
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="poor">
+                    <td><strong>Yếu (&lt;5.0)</strong></td>
+                    <td class="font-bold">2</td>
+                    <td class="font-bold">10.5%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 10.5%; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
+                                10.5%
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Notes Section -->
+    <div class="table-wrapper" style="margin-top: 30px;">
+        <h3 class="section-title">📝 Ghi Chú</h3>
+        <div style="padding: 15px; line-height: 1.8; color: #555;">
+            <ul>
+                <li><strong>Giỏi:</strong> Điểm từ 8.0 trở lên</li>
+                <li><strong>Khá:</strong> Điểm từ 6.5 đến 7.9</li>
+                <li><strong>Trung Bình:</strong> Điểm từ 5.0 đến 6.4</li>
+                <li><strong>Yếu:</strong> Điểm dưới 5.0</li>
+            </ul>
+            <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
+                <em>Dữ liệu cập nhật: <span id="lastUpdate">@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</span></em>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function loadScoresBySubject() {
+        const monHoc = document.getElementById('monHoc').value;
+        const loaiDiem = document.getElementById('loaiDiem').value;
+        
+        if (monHoc) {
+            window.location.href = `/Dashboard/ScoresBySubject?maMon=${monHoc}&loaiDiem=${loaiDiem}`;
+        }
+    }
+</script>

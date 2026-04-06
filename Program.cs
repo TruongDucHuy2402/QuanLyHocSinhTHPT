@@ -1,4 +1,5 @@
 using Oracle.ManagedDataAccess.Client;
+using QuanLyHocSinhTHPT.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,7 @@ builder.Services.AddCors(options =>
 
 var connectionString = builder.Configuration.GetConnectionString("OracleDB");
 builder.Services.AddSingleton(connectionString);
+builder.Services.AddScoped<HocSinhService>();
 
 var app = builder.Build();
 

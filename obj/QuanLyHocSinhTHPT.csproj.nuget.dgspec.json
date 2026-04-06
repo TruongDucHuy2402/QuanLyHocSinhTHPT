@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\QuanLyHocSinhTHPT\\QuanLyHocSinhTHPT.csproj": {}
+    "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\QuanLyHocSinhTHPT.csproj": {}
   },
   "projects": {
-    "D:\\QuanLyHocSinhTHPT\\QuanLyHocSinhTHPT.csproj": {
+    "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\QuanLyHocSinhTHPT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\QuanLyHocSinhTHPT\\QuanLyHocSinhTHPT.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\QuanLyHocSinhTHPT.csproj",
         "projectName": "QuanLyHocSinhTHPT",
-        "projectPath": "D:\\QuanLyHocSinhTHPT\\QuanLyHocSinhTHPT.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "D:\\QuanLyHocSinhTHPT\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\QuanLyHocSinhTHPT.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

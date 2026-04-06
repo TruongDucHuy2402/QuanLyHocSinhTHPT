@@ -1,12 +1,13 @@
 @{
-    ViewData["Title"] = "Điểm Số";
+    ViewData["Title"] = "Điểm Số Lớp";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
 <link rel="stylesheet" href="~/css/scores.css" />
+<link rel="stylesheet" href="~/css/tables.css" />
 
 <div class="scores-container">
-    <div class="panel-title">📈 Điểm Số Theo Môn Học</div>
+    <div class="panel-title">📊 Điểm Số - Lớp @ViewBag.LopHoc?.TenLop</div>
 
     @if (ViewBag.ErrorMessage != null)
     {
@@ -15,10 +16,10 @@
         </div>
     }
 
-    <!-- DEBUG INFO -->
-    <div style="background: #f0f7ff; border: 1px solid #0066cc; padding: 10px; margin-bottom: 15px; border-radius: 4px; font-size: 0.85rem;">
-        <strong>🔍 Debug Info:</strong> Lớp: @ViewBag.DebugMaLop | HK: @ViewBag.DebugHocKy | NH: @ViewBag.DebugNamHoc | 
-        📊 @ViewBag.TongMon màn | 👥 @ViewBag.TongHocSinh HS
+    <!-- Navigation -->
+    <div class="filter-section">
+        <a href="/LopHoc/Details/@ViewBag.MaLop" class="btn-primary">← Chi Tiết Lớp</a>
+        <a href="/LopHoc/Students/@ViewBag.MaLop" class="btn-primary" style="margin-left: 10px;">👥 Danh Sách HS</a>
     </div>
 
     <!-- Filter Section -->
@@ -40,12 +41,16 @@
     <!-- Summary Cards -->
     <div class="summary-section">
         <div class="summary-card">
-            <div class="card-title">📊 Tổng Số Môn Học</div>
-            <div class="card-value">@ViewBag.TongMon</div>
+            <div class="card-title">📚 Khối @ViewBag.LopHoc?.KhoiLop</div>
+            <div class="card-value">@ViewBag.LopHoc?.TenLop</div>
         </div>
         <div class="summary-card">
             <div class="card-title">👥 Tổng Số Học Sinh</div>
             <div class="card-value">@ViewBag.TongHocSinh</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">📊 Tổng Số Môn Học</div>
+            <div class="card-value">@ViewBag.TongMon</div>
         </div>
         <div class="summary-card">
             <div class="card-title">⭐ Điểm TB Chung</div>
@@ -68,7 +73,6 @@
                         <th class="col-xep-loai">Xếp Loại</th>
                         <th class="col-so-dat">Số HS Đạt</th>
                         <th class="col-ti-le">% Đạt</th>
-                        <th style="width: 100px; text-align: center;">Chi Tiết</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -110,11 +114,6 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td style="text-align: center;">
-                                    <a href="/Dashboard/ScoresBySubject?maMon=@item.MaMon" class="btn-detail" title="Xem chi tiết">
-                                        📊
-                                    </a>
-                                </td>
                             </tr>
                             stt++;
                         }
@@ -125,16 +124,16 @@
         else
         {
             <div class="no-data">
-                <p>Không có dữ liệu điểm số</p>
+                <p>Không có dữ liệu điểm số cho lớp này</p>
             </div>
         }
     </div>
 
-    <!-- Students List Section -->
+    <!-- Students Scores -->
     <div class="table-wrapper" style="margin-top: 30px;">
-        <h3 class="section-title">👥 Danh Sách Học Sinh Lớp</h3>
+        <h3 class="section-title">👥 Danh Sách Học Sinh</h3>
         
-        @if (ViewBag.DanhSachHocSinh != null && ((List<QuanLyHocSinhTHPT.Models.HocSinh>)ViewBag.DanhSachHocSinh).Count > 0)
+        @if (ViewBag.DanhSachHS != null && ((List<QuanLyHocSinhTHPT.Models.HocSinh>)ViewBag.DanhSachHS).Count > 0)
         {
             <table class="students-table">
                 <thead>
@@ -149,7 +148,7 @@
                 <tbody>
                     @{
                         int hsIndex = 1;
-                        foreach (var hs in (List<QuanLyHocSinhTHPT.Models.HocSinh>)ViewBag.DanhSachHocSinh)
+                        foreach (var hs in (List<QuanLyHocSinhTHPT.Models.HocSinh>)ViewBag.DanhSachHS)
                         {
                             var hanhKiemClass = hs.HanhKiem == "Tốt" ? "badge-good"
                                               : hs.HanhKiem == "Khá" ? "badge-notice"
@@ -191,7 +190,6 @@
     function reloadScores() {
         const hocKy = document.getElementById('hocKy').value;
         const namHoc = document.getElementById('namHoc').value;
-        window.location.href = `/Dashboard/Scores?hocKy=${hocKy}&namHoc=${encodeURIComponent(namHoc)}`;
+        window.location.href = `/LopHoc/Scores/@ViewBag.MaLop?hocKy=${hocKy}&namHoc=${encodeURIComponent(namHoc)}`;
     }
 </script>
-
