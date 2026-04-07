@@ -1,0 +1,108 @@
+@{
+    ViewData["Title"] = "Điểm TB Học Kỳ";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+    string xepLoai = ViewBag.XepLoai?.ToString() ?? "Chưa xếp loại";
+    string gradeClass = xepLoai == "Giỏi" ? "grade-good"
+                      : xepLoai == "Khá" ? "grade-fair"
+                      : xepLoai == "Trung Bình" ? "grade-average"
+                      : xepLoai == "Yếu" ? "grade-weak"
+                      : "";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/diemtbhk.css" />
+}
+
+<div class="diemtbhk-page">
+    <div class="diemtbhk-header">
+        <div class="diemtbhk-title">📘 Điểm Trung Bình Học Kỳ</div>
+        <div class="diemtbhk-subtitle">
+            Tra cứu điểm trung bình học kỳ và xếp loại học lực của học sinh.
+        </div>
+    </div>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="diemtbhk-alert diemtbhk-alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    <div class="diemtbhk-filter-card">
+        <div class="diemtbhk-filter-grid">
+            <div class="diemtbhk-group">
+                <label for="maHS" class="diemtbhk-label">Mã học sinh</label>
+                <input type="number" id="maHS" class="diemtbhk-input" value="@ViewBag.MaHS" min="1" step="1" />
+            </div>
+
+            <div class="diemtbhk-group">
+                <label for="hocKy" class="diemtbhk-label">Học kỳ</label>
+                <select id="hocKy" class="diemtbhk-select">
+                    @if ((ViewBag.HocKy ?? 1) == 2)
+                    {
+                        <option value="1">Học kỳ 1</option>
+                        <option value="2" selected>Học kỳ 2</option>
+                    }
+                    else
+                    {
+                        <option value="1" selected>Học kỳ 1</option>
+                        <option value="2">Học kỳ 2</option>
+                    }
+                </select>
+            </div>
+
+            <div class="diemtbhk-group">
+                <label for="namHoc" class="diemtbhk-label">Năm học</label>
+                <input type="text" id="namHoc" class="diemtbhk-input" value="@ViewBag.NamHoc" />
+            </div>
+
+            <button type="button" class="diemtbhk-btn" onclick="reloadDiemTBHK()">📊 Tính</button>
+        </div>
+    </div>
+
+    <div class="diemtbhk-summary">
+        <div class="diemtbhk-card">
+            <div class="diemtbhk-card-title">Mã học sinh</div>
+            <div class="diemtbhk-card-value">@ViewBag.MaHS</div>
+        </div>
+
+        <div class="diemtbhk-card">
+            <div class="diemtbhk-card-title">Họ tên học sinh</div>
+            <div class="diemtbhk-card-value name">@ViewBag.HoTenHocSinh</div>
+        </div>
+
+        <div class="diemtbhk-card">
+            <div class="diemtbhk-card-title">Điểm TB học kỳ</div>
+            <div class="diemtbhk-card-value">
+                @(ViewBag.DiemTB != null ? String.Format("{0:F2}", ViewBag.DiemTB) : "---")
+            </div>
+        </div>
+
+        <div class="diemtbhk-card">
+            <div class="diemtbhk-card-title">Xếp loại học lực</div>
+            <div class="diemtbhk-card-value @gradeClass">@xepLoai</div>
+        </div>
+    </div>
+
+    <div class="diemtbhk-note">
+        Hệ thống tính điểm trung bình học kỳ dựa trên dữ liệu điểm đã nhập trong Oracle.
+        Sau khi nhập thêm điểm mới, bạn có thể quay lại trang này để kiểm tra kết quả cập nhật.
+    </div>
+</div>
+
+<script>
+    function reloadDiemTBHK() {
+        const maHS = parseInt(document.getElementById('maHS').value, 10);
+        const hocKy = document.getElementById('hocKy').value;
+        const namHoc = document.getElementById('namHoc').value;
+
+        if (isNaN(maHS) || maHS <= 0) {
+            alert('Mã học sinh phải là số nguyên dương lớn hơn 0.');
+            document.getElementById('maHS').focus();
+            return;
+        }
+
+        window.location.href = `/HocSinhWeb/DiemTBHK?maHS=${maHS}&hocKy=${hocKy}&namHoc=${encodeURIComponent(namHoc)}`;
+    }
+</script>

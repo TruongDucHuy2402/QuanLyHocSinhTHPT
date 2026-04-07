@@ -1,13 +1,24 @@
+@using QuanLyHocSinhTHPT.Models
 @{
     ViewData["Title"] = "Điểm Số Lớp";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+    var lopHoc = ViewBag.LopHoc as LopHoc;
+    var diemTheoMon = ViewBag.DiemTheoMon as List<DiemMonTBResult> ?? new List<DiemMonTBResult>();
+    var danhSachHS = ViewBag.DanhSachHS as List<HocSinh> ?? new List<HocSinh>();
+
+    int hocKy = ViewBag.HocKy != null ? (int)ViewBag.HocKy : 1;
+    string namHoc = ViewBag.NamHoc?.ToString() ?? "2024-2025";
+    int maLop = ViewBag.MaLop != null ? (int)ViewBag.MaLop : 0;
 }
 
-<link rel="stylesheet" href="~/css/scores.css" />
-<link rel="stylesheet" href="~/css/tables.css" />
+@section Styles {
+    <link rel="stylesheet" href="~/css/scores.css" />
+    <link rel="stylesheet" href="~/css/tables.css" />
+}
 
 <div class="scores-container">
-    <div class="panel-title">📊 Điểm Số - Lớp @ViewBag.LopHoc?.TenLop</div>
+    <div class="panel-title">📊 Điểm Số - Lớp @(lopHoc?.TenLop ?? "")</div>
 
     @if (ViewBag.ErrorMessage != null)
     {
@@ -16,33 +27,44 @@
         </div>
     }
 
-    <!-- Navigation -->
     <div class="filter-section">
-        <a href="/LopHoc/Details/@ViewBag.MaLop" class="btn-primary">← Chi Tiết Lớp</a>
-        <a href="/LopHoc/Students/@ViewBag.MaLop" class="btn-primary" style="margin-left: 10px;">👥 Danh Sách HS</a>
+        <a href="/LopHoc/Details/@maLop" class="btn-primary">← Chi Tiết Lớp</a>
+        <a href="/LopHoc/Students/@maLop" class="btn-primary" style="margin-left: 10px;">👥 Danh Sách HS</a>
     </div>
 
-    <!-- Filter Section -->
     <div class="filter-section">
         <div class="filter-group">
-            <label>Học Kỳ:</label>
-            <select id="hocKy" class="form-control">
-                <option value="1" @(ViewBag.HocKy == 1 ? "selected" : "")>Học Kỳ 1</option>
-                <option value="2" @(ViewBag.HocKy == 2 ? "selected" : "")>Học Kỳ 2</option>
+            <label for="hocKy">Học Kỳ:</label>
+            <select name="hocKy" id="hocKy" class="form-control">
+                @if (hocKy == 2)
+                {
+                    <option value="1">Học kỳ 1</option>
+                    <option value="2" selected>Học kỳ 2</option>
+                }
+                else
+                {
+                    <option value="1" selected>Học kỳ 1</option>
+                    <option value="2">Học kỳ 2</option>
+                }
             </select>
         </div>
+
         <div class="filter-group">
-            <label>Năm Học:</label>
-            <input type="text" id="namHoc" class="form-control" value="@ViewBag.NamHoc" />
+            <label for="namHoc">Năm Học:</label>
+            <input type="text" id="namHoc" class="form-control" value="@namHoc" />
         </div>
-        <button class="btn-primary" onclick="reloadScores()">🔄 Tải Lại</button>
+
+        <button type="button" class="btn-primary" onclick="reloadScores()">🔄 Tải Lại</button>
     </div>
 
-    <!-- Summary Cards -->
     <div class="summary-section">
         <div class="summary-card">
-            <div class="card-title">📚 Khối @ViewBag.LopHoc?.KhoiLop</div>
-            <div class="card-value">@ViewBag.LopHoc?.TenLop</div>
+            <div class="card-title">📚 Khối</div>
+            <div class="card-value">@(lopHoc?.Khoi ?? "---")</div>
+        </div>
+        <div class="summary-card">
+            <div class="card-title">🏫 Lớp</div>
+            <div class="card-value">@(lopHoc?.TenLop ?? "---")</div>
         </div>
         <div class="summary-card">
             <div class="card-title">👥 Tổng Số Học Sinh</div>
@@ -58,11 +80,10 @@
         </div>
     </div>
 
-    <!-- Scores Table -->
     <div class="table-wrapper">
         <h3 class="section-title">📋 Bảng Điểm Trung Bình Các Môn Học</h3>
-        
-        @if (ViewBag.DiemTheoMon != null && ((List<QuanLyHocSinhTHPT.Models.DiemMonTBResult>)ViewBag.DiemTheoMon).Count > 0)
+
+        @if (diemTheoMon.Count > 0)
         {
             <table class="scores-table">
                 <thead>
@@ -78,45 +99,47 @@
                 <tbody>
                     @{
                         int stt = 1;
-                        foreach (var item in (List<QuanLyHocSinhTHPT.Models.DiemMonTBResult>)ViewBag.DiemTheoMon)
-                        {
-                            var diemTB = item.DiemTB_Mon ?? 0;
-                            var cssClass = diemTB >= 8 ? "excellent" 
-                                         : diemTB >= 6.5 ? "good"
-                                         : diemTB >= 5 ? "average"
-                                         : "poor";
-                            <tr class="score-row @cssClass">
-                                <td class="col-stt">@stt</td>
-                                <td class="col-mon">@item.TenMon</td>
-                                <td class="col-diem score-value">
-                                    @if (item.DiemTB_Mon.HasValue)
-                                    {
-                                        @String.Format("{0:F2}", item.DiemTB_Mon)
-                                    }
-                                    else
-                                    {
-                                        <text>---</text>
-                                    }
-                                </td>
-                                <td class="col-xep-loai">
-                                    @if (!string.IsNullOrEmpty(item.XepLoai))
-                                    {
-                                        <span class="badge badge-@item.XepLoai.ToLower().Replace(' ', '-')">
-                                            @item.XepLoai
-                                        </span>
-                                    }
-                                </td>
-                                <td class="col-so-dat">@item.SoHocSinhDat/@item.TongHocSinh</td>
-                                <td class="col-ti-le">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: @String.Format("{0:F0}", item.TiLeDat)%">
-                                            @String.Format("{0:F0}", item.TiLeDat)%
-                                        </div>
+                    }
+
+                    @foreach (var item in diemTheoMon)
+                    {
+                        var diemTB = item.DiemTB_Mon ?? 0;
+                        var cssClass = diemTB >= 8 ? "excellent"
+                                     : diemTB >= 6.5 ? "good"
+                                     : diemTB >= 5 ? "average"
+                                     : "poor";
+
+                        var xepLoaiClass = string.IsNullOrEmpty(item.XepLoai)
+                            ? ""
+                            : item.XepLoai.ToLower().Replace(" ", "-");
+
+                        <tr class="score-row @cssClass">
+                            <td class="col-stt">@stt</td>
+                            <td class="col-mon">@item.TenMon</td>
+                            <td class="col-diem score-value">
+                                @(item.DiemTB_Mon.HasValue ? item.DiemTB_Mon.Value.ToString("F2") : "---")
+                            </td>
+                            <td class="col-xep-loai">
+                                @if (!string.IsNullOrEmpty(item.XepLoai))
+                                {
+                                    <span class="badge badge-@xepLoaiClass">@item.XepLoai</span>
+                                }
+                                else
+                                {
+                                    <span>---</span>
+                                }
+                            </td>
+                            <td class="col-so-dat">@item.SoHocSinhDat/@item.TongHocSinh</td>
+                            <td class="col-ti-le">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width:@item.TiLeDat.ToString("F0")%">
+                                        @item.TiLeDat.ToString("F0")%
                                     </div>
-                                </td>
-                            </tr>
-                            stt++;
-                        }
+                                </div>
+                            </td>
+                        </tr>
+
+                        stt++;
                     }
                 </tbody>
             </table>
@@ -124,16 +147,15 @@
         else
         {
             <div class="no-data">
-                <p>Không có dữ liệu điểm số cho lớp này</p>
+                <p>Không có dữ liệu điểm số cho lớp này.</p>
             </div>
         }
     </div>
 
-    <!-- Students Scores -->
     <div class="table-wrapper" style="margin-top: 30px;">
         <h3 class="section-title">👥 Danh Sách Học Sinh</h3>
-        
-        @if (ViewBag.DanhSachHS != null && ((List<QuanLyHocSinhTHPT.Models.HocSinh>)ViewBag.DanhSachHS).Count > 0)
+
+        @if (danhSachHS.Count > 0)
         {
             <table class="students-table">
                 <thead>
@@ -148,31 +170,27 @@
                 <tbody>
                     @{
                         int hsIndex = 1;
-                        foreach (var hs in (List<QuanLyHocSinhTHPT.Models.HocSinh>)ViewBag.DanhSachHS)
-                        {
-                            var hanhKiemClass = hs.HanhKiem == "Tốt" ? "badge-good"
-                                              : hs.HanhKiem == "Khá" ? "badge-notice"
-                                              : "badge-bad";
-                            <tr>
-                                <td class="col-stt">@hsIndex</td>
-                                <td class="col-ma-hs">@hs.MaHS</td>
-                                <td class="col-ho-ten">@hs.HoTen</td>
-                                <td class="col-diem-tb">
-                                    @if (hs.DiemTB.HasValue)
-                                    {
-                                        @String.Format("{0:F2}", hs.DiemTB)
-                                    }
-                                    else
-                                    {
-                                        <text>---</text>
-                                    }
-                                </td>
-                                <td class="col-hanh-kiem">
-                                    <span class="badge @hanhKiemClass">@(hs.HanhKiem ?? "Chưa xếp loại")</span>
-                                </td>
-                            </tr>
-                            hsIndex++;
-                        }
+                    }
+
+                    @foreach (var hs in danhSachHS)
+                    {
+                        var hanhKiemClass = hs.HanhKiem == "Tốt" ? "badge-good"
+                                          : hs.HanhKiem == "Khá" ? "badge-notice"
+                                          : "badge-bad";
+
+                        <tr>
+                            <td class="col-stt">@hsIndex</td>
+                            <td class="col-ma-hs">@hs.MaHS</td>
+                            <td class="col-ho-ten">@hs.HoTen</td>
+                            <td class="col-diem-tb">
+                                @(hs.DiemTB.HasValue ? hs.DiemTB.Value.ToString("F2") : "---")
+                            </td>
+                            <td class="col-hanh-kiem">
+                                <span class="badge @hanhKiemClass">@(string.IsNullOrEmpty(hs.HanhKiem) ? "Chưa xếp loại" : hs.HanhKiem)</span>
+                            </td>
+                        </tr>
+
+                        hsIndex++;
                     }
                 </tbody>
             </table>
@@ -180,7 +198,7 @@
         else
         {
             <div class="no-data">
-                <p>Không có dữ liệu học sinh</p>
+                <p>Không có dữ liệu học sinh.</p>
             </div>
         }
     </div>
@@ -190,6 +208,6 @@
     function reloadScores() {
         const hocKy = document.getElementById('hocKy').value;
         const namHoc = document.getElementById('namHoc').value;
-        window.location.href = `/LopHoc/Scores/@ViewBag.MaLop?hocKy=${hocKy}&namHoc=${encodeURIComponent(namHoc)}`;
+        window.location.href = `/LopHoc/Scores/@maLop?hocKy=${hocKy}&namHoc=${encodeURIComponent(namHoc)}`;
     }
 </script>

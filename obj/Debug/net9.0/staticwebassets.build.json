@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fdBMdfFzx2I5pWyCbFMGuJ2LhtuSzhUbaA0DCr6z+T8=",
+  "Hash": "X3ROQz/PDTj7VfR2f950moy/aAMbk200s9g1PSloDqQ=",
   "Source": "QuanLyHocSinhTHPT",
   "BasePath": "_content/QuanLyHocSinhTHPT",
   "Mode": "Default",
@@ -16,6 +16,27 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\4mgydkggq3-h5cf4jv8gc.gz",
+      "SourceId": "QuanLyHocSinhTHPT",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "RelativePath": "css/nhapdiem#[.{fingerprint=h5cf4jv8gc}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\nhapdiem.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "jukamx4t6p",
+      "Integrity": "9f0h+Rr0sOyG9Q5sSrGBrJBND/DvzThpLheGDKQFy/A=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\nhapdiem.css"
+    },
     {
       "Identity": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\7whlqt7wy6-c0xmuduoeu.gz",
       "SourceId": "QuanLyHocSinhTHPT",
@@ -57,6 +78,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\scores.css"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\lyvlo66iyu-jhh6x3k1d7.gz",
+      "SourceId": "QuanLyHocSinhTHPT",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "RelativePath": "css/diemtbmon#[.{fingerprint=jhh6x3k1d7}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\diemtbmon.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "wkjirgwopq",
+      "Integrity": "YJE7kq5HRgbtQvvR9lWGLWqgr46k9U221ZWDtkOn9fw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\diemtbmon.css"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\mdj2xoltej-gsf2zxmaja.gz",
+      "SourceId": "QuanLyHocSinhTHPT",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "RelativePath": "css/diemtbhk#[.{fingerprint=gsf2zxmaja}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\diemtbhk.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "h5snt4s55w",
+      "Integrity": "RbtECO3fvpt3n1HNo8xNUgdVrgEn7j9C6r/AG6Cr5eA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\diemtbhk.css"
     },
     {
       "Identity": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\phi311m333-70m8x2ty54.gz",
@@ -143,6 +206,48 @@
       "OriginalItemSpec": "wwwroot\\css\\dashboard.css"
     },
     {
+      "Identity": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\diemtbhk.css",
+      "SourceId": "QuanLyHocSinhTHPT",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "RelativePath": "css/diemtbhk#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "gsf2zxmaja",
+      "Integrity": "cMP23P9kCvUKbXT7A/nbHwkPNheDkp6awBh9zmLlUBo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\diemtbhk.css"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\diemtbmon.css",
+      "SourceId": "QuanLyHocSinhTHPT",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "RelativePath": "css/diemtbmon#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "jhh6x3k1d7",
+      "Integrity": "+TTp6Gp0Q5TMvb+smc86UzAMA6NyMPkrWaWeWXEZP1Y=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\diemtbmon.css"
+    },
+    {
       "Identity": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\hocsinh-list.css",
       "SourceId": "QuanLyHocSinhTHPT",
       "SourceType": "Discovered",
@@ -183,6 +288,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\login.css"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\nhapdiem.css",
+      "SourceId": "QuanLyHocSinhTHPT",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\",
+      "BasePath": "_content/QuanLyHocSinhTHPT",
+      "RelativePath": "css/nhapdiem#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "h5cf4jv8gc",
+      "Integrity": "u3TvbRmv4IqO2fIjL9nYpTXf49xYyBG2sqBfuA6Sbv0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\nhapdiem.css"
     },
     {
       "Identity": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\scores.css",
@@ -523,6 +649,602 @@
         {
           "Name": "integrity",
           "Value": "sha256-Ao79vAT+u0GkJMeAcgcWodprd2gXmdY99G6b3+xE5JI="
+        }
+      ]
+    },
+    {
+      "Route": "css/diemtbhk.css",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\mdj2xoltej-gsf2zxmaja.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000897666068"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1113"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RbtECO3fvpt3n1HNo8xNUgdVrgEn7j9C6r/AG6Cr5eA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 12:28:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"cMP23P9kCvUKbXT7A/nbHwkPNheDkp6awBh9zmLlUBo=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-cMP23P9kCvUKbXT7A/nbHwkPNheDkp6awBh9zmLlUBo="
+        }
+      ]
+    },
+    {
+      "Route": "css/diemtbhk.css",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\diemtbhk.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3942"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cMP23P9kCvUKbXT7A/nbHwkPNheDkp6awBh9zmLlUBo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 12:28:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-cMP23P9kCvUKbXT7A/nbHwkPNheDkp6awBh9zmLlUBo="
+        }
+      ]
+    },
+    {
+      "Route": "css/diemtbhk.css.gz",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\mdj2xoltej-gsf2zxmaja.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1113"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RbtECO3fvpt3n1HNo8xNUgdVrgEn7j9C6r/AG6Cr5eA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 12:28:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-RbtECO3fvpt3n1HNo8xNUgdVrgEn7j9C6r/AG6Cr5eA="
+        }
+      ]
+    },
+    {
+      "Route": "css/diemtbhk.gsf2zxmaja.css",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\mdj2xoltej-gsf2zxmaja.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000897666068"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1113"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RbtECO3fvpt3n1HNo8xNUgdVrgEn7j9C6r/AG6Cr5eA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 12:28:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"cMP23P9kCvUKbXT7A/nbHwkPNheDkp6awBh9zmLlUBo=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gsf2zxmaja"
+        },
+        {
+          "Name": "label",
+          "Value": "css/diemtbhk.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-cMP23P9kCvUKbXT7A/nbHwkPNheDkp6awBh9zmLlUBo="
+        }
+      ]
+    },
+    {
+      "Route": "css/diemtbhk.gsf2zxmaja.css",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\diemtbhk.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3942"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cMP23P9kCvUKbXT7A/nbHwkPNheDkp6awBh9zmLlUBo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 12:28:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gsf2zxmaja"
+        },
+        {
+          "Name": "label",
+          "Value": "css/diemtbhk.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-cMP23P9kCvUKbXT7A/nbHwkPNheDkp6awBh9zmLlUBo="
+        }
+      ]
+    },
+    {
+      "Route": "css/diemtbhk.gsf2zxmaja.css.gz",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\mdj2xoltej-gsf2zxmaja.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1113"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RbtECO3fvpt3n1HNo8xNUgdVrgEn7j9C6r/AG6Cr5eA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 12:28:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gsf2zxmaja"
+        },
+        {
+          "Name": "label",
+          "Value": "css/diemtbhk.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-RbtECO3fvpt3n1HNo8xNUgdVrgEn7j9C6r/AG6Cr5eA="
+        }
+      ]
+    },
+    {
+      "Route": "css/diemtbmon.css",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\lyvlo66iyu-jhh6x3k1d7.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000942507069"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1060"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YJE7kq5HRgbtQvvR9lWGLWqgr46k9U221ZWDtkOn9fw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 13:25:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"+TTp6Gp0Q5TMvb+smc86UzAMA6NyMPkrWaWeWXEZP1Y=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+TTp6Gp0Q5TMvb+smc86UzAMA6NyMPkrWaWeWXEZP1Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/diemtbmon.css",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\diemtbmon.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3493"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+TTp6Gp0Q5TMvb+smc86UzAMA6NyMPkrWaWeWXEZP1Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 13:25:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+TTp6Gp0Q5TMvb+smc86UzAMA6NyMPkrWaWeWXEZP1Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/diemtbmon.css.gz",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\lyvlo66iyu-jhh6x3k1d7.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1060"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YJE7kq5HRgbtQvvR9lWGLWqgr46k9U221ZWDtkOn9fw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 13:25:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-YJE7kq5HRgbtQvvR9lWGLWqgr46k9U221ZWDtkOn9fw="
+        }
+      ]
+    },
+    {
+      "Route": "css/diemtbmon.jhh6x3k1d7.css",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\lyvlo66iyu-jhh6x3k1d7.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000942507069"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1060"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YJE7kq5HRgbtQvvR9lWGLWqgr46k9U221ZWDtkOn9fw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 13:25:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"+TTp6Gp0Q5TMvb+smc86UzAMA6NyMPkrWaWeWXEZP1Y=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "jhh6x3k1d7"
+        },
+        {
+          "Name": "label",
+          "Value": "css/diemtbmon.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+TTp6Gp0Q5TMvb+smc86UzAMA6NyMPkrWaWeWXEZP1Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/diemtbmon.jhh6x3k1d7.css",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\diemtbmon.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3493"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+TTp6Gp0Q5TMvb+smc86UzAMA6NyMPkrWaWeWXEZP1Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 13:25:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "jhh6x3k1d7"
+        },
+        {
+          "Name": "label",
+          "Value": "css/diemtbmon.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+TTp6Gp0Q5TMvb+smc86UzAMA6NyMPkrWaWeWXEZP1Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/diemtbmon.jhh6x3k1d7.css.gz",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\lyvlo66iyu-jhh6x3k1d7.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1060"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YJE7kq5HRgbtQvvR9lWGLWqgr46k9U221ZWDtkOn9fw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 13:25:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "jhh6x3k1d7"
+        },
+        {
+          "Name": "label",
+          "Value": "css/diemtbmon.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-YJE7kq5HRgbtQvvR9lWGLWqgr46k9U221ZWDtkOn9fw="
         }
       ]
     },
@@ -1119,6 +1841,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-H3IvguAOPrmZvN8X9qHYBqzpW9Jef/JfmbWgZxOAvxE="
+        }
+      ]
+    },
+    {
+      "Route": "css/nhapdiem.css",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\4mgydkggq3-h5cf4jv8gc.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000938967136"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1064"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9f0h+Rr0sOyG9Q5sSrGBrJBND/DvzThpLheGDKQFy/A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 02:12:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"u3TvbRmv4IqO2fIjL9nYpTXf49xYyBG2sqBfuA6Sbv0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-u3TvbRmv4IqO2fIjL9nYpTXf49xYyBG2sqBfuA6Sbv0="
+        }
+      ]
+    },
+    {
+      "Route": "css/nhapdiem.css",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\nhapdiem.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3528"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"u3TvbRmv4IqO2fIjL9nYpTXf49xYyBG2sqBfuA6Sbv0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 02:12:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-u3TvbRmv4IqO2fIjL9nYpTXf49xYyBG2sqBfuA6Sbv0="
+        }
+      ]
+    },
+    {
+      "Route": "css/nhapdiem.css.gz",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\4mgydkggq3-h5cf4jv8gc.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1064"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9f0h+Rr0sOyG9Q5sSrGBrJBND/DvzThpLheGDKQFy/A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 02:12:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9f0h+Rr0sOyG9Q5sSrGBrJBND/DvzThpLheGDKQFy/A="
+        }
+      ]
+    },
+    {
+      "Route": "css/nhapdiem.h5cf4jv8gc.css",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\4mgydkggq3-h5cf4jv8gc.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000938967136"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1064"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9f0h+Rr0sOyG9Q5sSrGBrJBND/DvzThpLheGDKQFy/A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 02:12:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"u3TvbRmv4IqO2fIjL9nYpTXf49xYyBG2sqBfuA6Sbv0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "h5cf4jv8gc"
+        },
+        {
+          "Name": "label",
+          "Value": "css/nhapdiem.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-u3TvbRmv4IqO2fIjL9nYpTXf49xYyBG2sqBfuA6Sbv0="
+        }
+      ]
+    },
+    {
+      "Route": "css/nhapdiem.h5cf4jv8gc.css",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\nhapdiem.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3528"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"u3TvbRmv4IqO2fIjL9nYpTXf49xYyBG2sqBfuA6Sbv0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 02:12:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "h5cf4jv8gc"
+        },
+        {
+          "Name": "label",
+          "Value": "css/nhapdiem.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-u3TvbRmv4IqO2fIjL9nYpTXf49xYyBG2sqBfuA6Sbv0="
+        }
+      ]
+    },
+    {
+      "Route": "css/nhapdiem.h5cf4jv8gc.css.gz",
+      "AssetFile": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\obj\\Debug\\net9.0\\compressed\\4mgydkggq3-h5cf4jv8gc.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1064"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9f0h+Rr0sOyG9Q5sSrGBrJBND/DvzThpLheGDKQFy/A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 02:12:15 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "h5cf4jv8gc"
+        },
+        {
+          "Name": "label",
+          "Value": "css/nhapdiem.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9f0h+Rr0sOyG9Q5sSrGBrJBND/DvzThpLheGDKQFy/A="
         }
       ]
     },

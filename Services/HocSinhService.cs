@@ -145,6 +145,64 @@ namespace QuanLyHocSinhTHPT.Services
             }
             return null;
         }
+        public DiemChiTietMonResult GetChiTietDiemMon(int maHS, int maMon, int hocKy, string namHoc)
+        {
+            using var conn = new OracleConnection(_connectionString);
+            conn.Open();
+
+            string sql = @"
+                SELECT 
+                    bd.MaHS,
+                    hs.HoTen AS TenHocSinh,
+                    mh.TenMon,
+                    ROUND(AVG(CASE WHEN bd.MaLD = 2 THEN bd.SoDiem END), 2) AS Diem15Phut,
+                    ROUND(AVG(CASE WHEN bd.MaLD = 3 THEN bd.SoDiem END), 2) AS Diem1Tiet,
+                    ROUND(AVG(CASE WHEN bd.MaLD = 5 THEN bd.SoDiem END), 2) AS DiemHocKy,
+                    FN_TINH_DIEM_TB_MON(:fnMaHS, :fnMaMon, :fnHocKy, :fnNamHoc) AS DiemTBMon
+                FROM BANG_DIEM bd
+                JOIN HOC_SINH hs ON bd.MaHS = hs.MaHS
+                JOIN MON_HOC mh ON bd.MaMon = mh.MaMon
+                WHERE bd.MaHS = :maHS
+                AND bd.MaMon = :maMon
+                AND bd.HocKy = :hocKy
+                AND bd.NamHoc = :namHoc
+                GROUP BY bd.MaHS, hs.HoTen, mh.TenMon";
+
+            using var cmd = new OracleCommand(sql, conn);
+
+            cmd.Parameters.Add("fnMaHS", OracleDbType.Int32).Value = maHS;
+            cmd.Parameters.Add("fnMaMon", OracleDbType.Int32).Value = maMon;
+            cmd.Parameters.Add("fnHocKy", OracleDbType.Int32).Value = hocKy;
+            cmd.Parameters.Add("fnNamHoc", OracleDbType.Varchar2).Value = namHoc;
+
+            cmd.Parameters.Add("maHS", OracleDbType.Int32).Value = maHS;
+            cmd.Parameters.Add("maMon", OracleDbType.Int32).Value = maMon;
+            cmd.Parameters.Add("hocKy", OracleDbType.Int32).Value = hocKy;
+            cmd.Parameters.Add("namHoc", OracleDbType.Varchar2).Value = namHoc;
+
+            using var reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return new DiemChiTietMonResult
+                {
+                    MaHS = Convert.ToInt32(reader["MaHS"]),
+                    HoTenHocSinh = reader["TenHocSinh"]?.ToString() ?? "",
+                    MaMon = maMon,
+                    TenMon = reader["TenMon"]?.ToString() ?? "",
+                    Diem15Phut = reader["Diem15Phut"] == DBNull.Value ? null : Convert.ToSingle(reader["Diem15Phut"]),
+                    Diem1Tiet = reader["Diem1Tiet"] == DBNull.Value ? null : Convert.ToSingle(reader["Diem1Tiet"]),
+                    DiemHocKy = reader["DiemHocKy"] == DBNull.Value ? null : Convert.ToSingle(reader["DiemHocKy"]),
+                    DiemTBMon = reader["DiemTBMon"] == DBNull.Value ? null : Convert.ToSingle(reader["DiemTBMon"])
+                };
+            }
+
+            return new DiemChiTietMonResult
+            {
+                MaHS = maHS,
+                MaMon = maMon
+            };
+        }
 
         // Helper tránh lặp code mapping ─────────────────
         private static HocSinh MapHocSinh(OracleDataReader r) => new()
@@ -584,7 +642,6 @@ namespace QuanLyHocSinhTHPT.Services
 
             try
             {
-                // Get the average score per student & subject, filtered by LoaiDiem if provided
                 string sql = @"
                     SELECT 
                         bd.MaHS,
@@ -592,13 +649,39 @@ namespace QuanLyHocSinhTHPT.Services
                     FROM BANG_DIEM bd
                     INNER JOIN HOC_SINH hs ON bd.MaHS = hs.MaHS
                     WHERE hs.MaLop  = :maLop
-                      AND bd.MaMon  = :maMon
-                      AND bd.HocKy  = :hocKy
-                      AND bd.NamHoc = :namHoc";
+                    AND bd.MaMon  = :maMon
+                    AND bd.HocKy  = :hocKy
+                    AND bd.NamHoc = :namHoc";
 
-                if (!string.IsNullOrEmpty(loaiDiem) && loaiDiem != "")
+                int? maLD = null;
+                if (!string.IsNullOrEmpty(loaiDiem))
                 {
-                    sql += " AND bd.LoaiDiem = :loaiDiem";
+                    switch (loaiDiem)
+                    {
+                        case "1":
+                            maLD = 1; // Điểm miệng
+                            break;
+                        case "2":
+                        case "15":
+                            maLD = 2; // Điểm 15 phút
+                            break;
+                        case "3":
+                        case "45":
+                            maLD = 3; // Điểm 1 tiết
+                            break;
+                        case "4":
+                            maLD = 4; // Điểm giữa kỳ
+                            break;
+                        case "5":
+                        case "112":
+                            maLD = 5; // Điểm cuối kỳ
+                            break;
+                    }
+                }
+
+                if (maLD.HasValue)
+                {
+                    sql += " AND bd.MaLD = :maLD";
                 }
 
                 sql += @"
@@ -606,14 +689,14 @@ namespace QuanLyHocSinhTHPT.Services
                     ORDER BY DiemTB_Mon DESC";
 
                 using var cmd = new OracleCommand(sql, conn);
-                cmd.Parameters.Add("maLop",  OracleDbType.Int32).Value    = maLop;
-                cmd.Parameters.Add("maMon",  OracleDbType.Int32).Value    = maMon;
-                cmd.Parameters.Add("hocKy",  OracleDbType.Int32).Value    = hocKy;
+                cmd.Parameters.Add("maLop", OracleDbType.Int32).Value = maLop;
+                cmd.Parameters.Add("maMon", OracleDbType.Int32).Value = maMon;
+                cmd.Parameters.Add("hocKy", OracleDbType.Int32).Value = hocKy;
                 cmd.Parameters.Add("namHoc", OracleDbType.Varchar2).Value = namHoc;
-                
-                if (!string.IsNullOrEmpty(loaiDiem) && loaiDiem != "")
+
+                if (maLD.HasValue)
                 {
-                    cmd.Parameters.Add("loaiDiem", OracleDbType.Varchar2).Value = loaiDiem;
+                    cmd.Parameters.Add("maLD", OracleDbType.Int32).Value = maLD.Value;
                 }
 
                 var scores = new List<float>();
@@ -626,13 +709,7 @@ namespace QuanLyHocSinhTHPT.Services
                     }
                 }
 
-                System.Diagnostics.Debug.WriteLine($"📌 GetScoreDistribution: MaLop={maLop}, MaMon={maMon}, LoaiDiem={loaiDiem ?? "null"}, Scores Count={scores.Count}");
-                if (scores.Count > 0)
-                {
-                    System.Diagnostics.Debug.WriteLine($"   Scores: Min={scores.Min()}, Max={scores.Max()}, Avg={scores.Average()}");
-                }
-
-                var result = new ScoreDistributionResult
+                return new ScoreDistributionResult
                 {
                     TongHocSinh = scores.Count,
                     MaxScore = scores.Count > 0 ? scores.Max() : 0,
@@ -643,8 +720,6 @@ namespace QuanLyHocSinhTHPT.Services
                     SoTrungBinh = scores.Count(s => s >= 5.0f && s < 6.5f),
                     SoYeu = scores.Count(s => s < 5.0f)
                 };
-
-                return result;
             }
             catch (Exception ex)
             {

@@ -1,0 +1,89 @@
+@model QuanLyHocSinhTHPT.Models.NhapDiemRequest
+
+@{
+    ViewData["Title"] = "Nhập Điểm";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/nhapdiem.css" />
+}
+
+<div class="nhapdiem-page">
+    <div class="nhapdiem-card">
+
+        <div class="nhapdiem-title">📝 Nhập điểm học sinh</div>
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="nhapdiem-alert nhapdiem-alert-success">
+                ✅ @TempData["Success"]
+            </div>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="nhapdiem-alert nhapdiem-alert-error">
+                ❌ @TempData["Error"]
+            </div>
+        }
+
+        <form asp-action="NhapDiem" method="post" class="nhapdiem-form">
+            @Html.AntiForgeryToken()
+
+            <div class="nhapdiem-group">
+                <label asp-for="MaGV"></label>
+                <input asp-for="MaGV" class="nhapdiem-input" type="number" />
+                <span asp-validation-for="MaGV"></span>
+            </div>
+
+            <div class="nhapdiem-group">
+                <label asp-for="MaHS"></label>
+                <input asp-for="MaHS" class="nhapdiem-input" type="number" />
+                <span asp-validation-for="MaHS"></span>
+            </div>
+
+            <div class="nhapdiem-group">
+                <label asp-for="MaMon"></label>
+                <input asp-for="MaMon" class="nhapdiem-input" type="number" />
+                <span asp-validation-for="MaMon"></span>
+            </div>
+
+            <div class="nhapdiem-group">
+                <label asp-for="MaLD"></label>
+                <input asp-for="MaLD" class="nhapdiem-input" type="number" />
+                <span asp-validation-for="MaLD"></span>
+            </div>
+
+            <div class="nhapdiem-group">
+                <label asp-for="HocKy"></label>
+                <select asp-for="HocKy" class="nhapdiem-select">
+                    <option value="1">Học kỳ 1</option>
+                    <option value="2">Học kỳ 2</option>
+                </select>
+                <span asp-validation-for="HocKy"></span>
+            </div>
+
+            <div class="nhapdiem-group">
+                <label asp-for="NamHoc"></label>
+                <input asp-for="NamHoc" class="nhapdiem-input" />
+                <span asp-validation-for="NamHoc"></span>
+            </div>
+
+            <div class="nhapdiem-group nhapdiem-group-full">
+                <label asp-for="SoDiem"></label>
+                <input asp-for="SoDiem" class="nhapdiem-input" type="number" step="0.1" />
+                <span asp-validation-for="SoDiem"></span>
+            </div>
+
+            <div class="nhapdiem-actions">
+                <button type="submit" class="nhapdiem-btn nhapdiem-btn-primary">💾 Lưu</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
