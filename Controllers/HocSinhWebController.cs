@@ -192,5 +192,94 @@ namespace QuanLyHocSinhTHPT.Controllers
 
             return RedirectToAction("NhapDiem");
         }
+        [HttpGet]
+        public IActionResult DiemTBHK(int maHS = 1, int hocKy = 1, string namHoc = "2024-2025")
+        {
+            if (!CheckLogin())
+                return RedirectToAction("Index", "Login");
+
+            SetViewBagUser();
+
+            try
+            {
+                var hocSinh = _service.GetHocSinhById(maHS);
+                var diemTB = _service.TinhDiemTBHK(maHS, hocKy, namHoc);
+                var xepLoai = diemTB.HasValue
+                    ? _service.XepLoaiHocLuc(diemTB.Value)
+                    : "Chưa xếp loại";
+
+                ViewBag.MaHS = maHS;
+                ViewBag.HoTenHocSinh = hocSinh?.HoTen ?? "Không tìm thấy học sinh";
+                ViewBag.HocKy = hocKy;
+                ViewBag.NamHoc = namHoc;
+                ViewBag.DiemTB = diemTB;
+                ViewBag.XepLoai = xepLoai;
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = $"Có lỗi: {ex.Message}";
+                return View();
+            }
+        }
+        [HttpGet]
+        public IActionResult DiemTBMon(int maHS = 1, int maMon = 1, int hocKy = 1, string namHoc = "2024-2025")
+        {
+            if (!CheckLogin())
+                return RedirectToAction("Index", "Login");
+
+            SetViewBagUser();
+
+            try
+            {
+                if (maHS <= 0)
+                {
+                    ViewBag.ErrorMessage = "Mã học sinh phải lớn hơn 0.";
+                    ViewBag.MaHS = 1;
+                    ViewBag.MaMon = maMon > 0 ? maMon : 1;
+                    ViewBag.HocKy = hocKy;
+                    ViewBag.NamHoc = namHoc;
+                    ViewBag.DanhSachMon = _service.GetDanhSachMonHoc();
+                    return View();
+                }
+
+                if (maMon <= 0)
+                {
+                    ViewBag.ErrorMessage = "Mã môn phải lớn hơn 0.";
+                    ViewBag.MaHS = maHS;
+                    ViewBag.MaMon = 1;
+                    ViewBag.HocKy = hocKy;
+                    ViewBag.NamHoc = namHoc;
+                    ViewBag.DanhSachMon = _service.GetDanhSachMonHoc();
+                    return View();
+                }
+
+                var chiTiet = _service.GetChiTietDiemMon(maHS, maMon, hocKy, namHoc);
+                var danhSachMon = _service.GetDanhSachMonHoc();
+
+                ViewBag.MaHS = maHS;
+                ViewBag.MaMon = maMon;
+                ViewBag.HocKy = hocKy;
+                ViewBag.NamHoc = namHoc;
+                ViewBag.DanhSachMon = danhSachMon;
+
+                ViewBag.HoTenHocSinh = string.IsNullOrEmpty(chiTiet.HoTenHocSinh) ? "Không tìm thấy học sinh" : chiTiet.HoTenHocSinh;
+                ViewBag.TenMon = string.IsNullOrEmpty(chiTiet.TenMon) ? "Không tìm thấy môn học" : chiTiet.TenMon;
+
+                ViewBag.Diem15Phut = chiTiet.Diem15Phut;
+                ViewBag.Diem1Tiet = chiTiet.Diem1Tiet;
+                ViewBag.DiemHocKy = chiTiet.DiemHocKy;
+                ViewBag.DiemTBMon = chiTiet.DiemTBMon;
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = $"Có lỗi: {ex.Message}";
+                ViewBag.DanhSachMon = _service.GetDanhSachMonHoc();
+                return View();
+            }
+        }
     }
 }

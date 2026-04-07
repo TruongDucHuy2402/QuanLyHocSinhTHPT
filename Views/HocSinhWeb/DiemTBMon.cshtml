@@ -1,0 +1,164 @@
+@using QuanLyHocSinhTHPT.Models
+@{
+    ViewData["Title"] = "Điểm TB Môn";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+    var danhSachMon = ViewBag.DanhSachMon as List<MonHoc> ?? new List<MonHoc>();
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/diemtbmon.css" />
+}
+
+<div class="diemtbmon-page">
+    <div class="diemtbmon-header">
+        <div class="diemtbmon-title">📘 Điểm Trung Bình Môn</div>
+        <div class="diemtbmon-subtitle">
+            Tra cứu điểm trung bình môn và các đầu điểm chính của học sinh theo học kỳ, năm học.
+        </div>
+    </div>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="diemtbmon-alert diemtbmon-alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    <div class="diemtbmon-filter-card">
+        <div class="diemtbmon-filter-grid">
+            <div class="diemtbmon-group">
+                <label for="maHS" class="diemtbmon-label">Mã học sinh</label>
+                <input type="number"
+                       id="maHS"
+                       class="diemtbmon-input"
+                       value="@(ViewBag.MaHS ?? 1)"
+                       min="1"
+                       step="1" />
+            </div>
+
+            <div class="diemtbmon-group">
+                <label for="maMon" class="diemtbmon-label">Môn học</label>
+                <select id="maMon" class="diemtbmon-select">
+                    @if (danhSachMon.Count > 0)
+                    {
+                        @foreach (var mon in danhSachMon)
+                        {
+                            if (mon.MaMon == (ViewBag.MaMon ?? 1))
+                            {
+                                <option value="@mon.MaMon" selected>@mon.TenMon</option>
+                            }
+                            else
+                            {
+                                <option value="@mon.MaMon">@mon.TenMon</option>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <option value="1">Môn học</option>
+                    }
+                </select>
+            </div>
+
+            <div class="diemtbmon-group">
+                <label for="hocKy" class="diemtbmon-label">Học kỳ</label>
+                <select id="hocKy" class="diemtbmon-select">
+                    @if ((ViewBag.HocKy ?? 1) == 2)
+                    {
+                        <option value="1">Học kỳ 1</option>
+                        <option value="2" selected>Học kỳ 2</option>
+                    }
+                    else
+                    {
+                        <option value="1" selected>Học kỳ 1</option>
+                        <option value="2">Học kỳ 2</option>
+                    }
+                </select>
+            </div>
+
+            <div class="diemtbmon-group">
+                <label for="namHoc" class="diemtbmon-label">Năm học</label>
+                <input type="text"
+                       id="namHoc"
+                       class="diemtbmon-input"
+                       value="@(ViewBag.NamHoc ?? "2024-2025")" />
+            </div>
+
+            <button type="button" class="diemtbmon-btn" onclick="reloadDiemTBMon()">📊 Tính</button>
+        </div>
+    </div>
+
+    <div class="diemtbmon-summary">
+        <div class="diemtbmon-card">
+            <div class="diemtbmon-card-title">Mã học sinh</div>
+            <div class="diemtbmon-card-value">@ViewBag.MaHS</div>
+        </div>
+
+        <div class="diemtbmon-card">
+            <div class="diemtbmon-card-title">Họ tên học sinh</div>
+            <div class="diemtbmon-card-value name">@ViewBag.HoTenHocSinh</div>
+        </div>
+
+        <div class="diemtbmon-card">
+            <div class="diemtbmon-card-title">Môn học</div>
+            <div class="diemtbmon-card-value name">@ViewBag.TenMon</div>
+        </div>
+
+        <div class="diemtbmon-card">
+            <div class="diemtbmon-card-title">Điểm 15 phút</div>
+            <div class="diemtbmon-card-value">
+                @(ViewBag.Diem15Phut != null ? String.Format("{0:F2}", ViewBag.Diem15Phut) : "---")
+            </div>
+        </div>
+
+        <div class="diemtbmon-card">
+            <div class="diemtbmon-card-title">Điểm 1 tiết</div>
+            <div class="diemtbmon-card-value">
+                @(ViewBag.Diem1Tiet != null ? String.Format("{0:F2}", ViewBag.Diem1Tiet) : "---")
+            </div>
+        </div>
+
+        <div class="diemtbmon-card">
+            <div class="diemtbmon-card-title">Điểm học kỳ</div>
+            <div class="diemtbmon-card-value">
+                @(ViewBag.DiemHocKy != null ? String.Format("{0:F2}", ViewBag.DiemHocKy) : "---")
+            </div>
+        </div>
+
+        <div class="diemtbmon-card">
+            <div class="diemtbmon-card-title">Điểm TB môn</div>
+            <div class="diemtbmon-card-value">
+                @(ViewBag.DiemTBMon != null ? String.Format("{0:F2}", ViewBag.DiemTBMon) : "---")
+            </div>
+        </div>
+    </div>
+
+    <div class="diemtbmon-note">
+        Điểm 15 phút, điểm 1 tiết và điểm học kỳ được lấy theo dữ liệu đã nhập trong hệ thống.
+        Điểm trung bình môn được tính theo function Oracle của hệ thống.
+    </div>
+</div>
+
+<script>
+    function reloadDiemTBMon() {
+        const maHS = parseInt(document.getElementById('maHS').value, 10);
+        const maMon = parseInt(document.getElementById('maMon').value, 10);
+        const hocKy = document.getElementById('hocKy').value;
+        const namHoc = document.getElementById('namHoc').value;
+
+        if (isNaN(maHS) || maHS <= 0) {
+            alert('Mã học sinh phải là số nguyên dương lớn hơn 0.');
+            document.getElementById('maHS').focus();
+            return;
+        }
+
+        if (isNaN(maMon) || maMon <= 0) {
+            alert('Mã môn phải hợp lệ.');
+            document.getElementById('maMon').focus();
+            return;
+        }
+
+        window.location.href = `/HocSinhWeb/DiemTBMon?maHS=${maHS}&maMon=${maMon}&hocKy=${hocKy}&namHoc=${encodeURIComponent(namHoc)}`;
+    }
+</script>

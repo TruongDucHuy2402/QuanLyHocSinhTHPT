@@ -5,12 +5,24 @@
       "PackagePath": "staticwebassets\\css\\dashboard.css"
     },
     {
+      "Id": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\diemtbhk.css",
+      "PackagePath": "staticwebassets\\css\\diemtbhk.css"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\diemtbmon.css",
+      "PackagePath": "staticwebassets\\css\\diemtbmon.css"
+    },
+    {
       "Id": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\hocsinh-list.css",
       "PackagePath": "staticwebassets\\css\\hocsinh-list.css"
     },
     {
       "Id": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\login.css",
       "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\nhapdiem.css",
+      "PackagePath": "staticwebassets\\css\\nhapdiem.css"
     },
     {
       "Id": "C:\\Users\\Admin\\QuanLyHocSinhTHPT\\wwwroot\\css\\scores.css",

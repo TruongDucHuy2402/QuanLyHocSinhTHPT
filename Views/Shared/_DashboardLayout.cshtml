@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - Quản Lý Học Sinh THPT</title>
+
     <link rel="stylesheet" href="~/css/dashboard.css">
     <link rel="stylesheet" href="~/css/tables.css">
     <link rel="stylesheet" href="~/css/scores.css">
+
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <div class="navbar">
@@ -21,40 +24,114 @@
     </div>
 
     <div class="main-container">
-        <!-- Sidebar Menu -->
         <div class="sidebar">
             <div class="sidebar-title">📋 Chức Năng Chính</div>
             <ul class="sidebar-menu">
-                <li><a href="/Dashboard" class="menu-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")">🏠 Trang Chủ</a></li>
-                <li><a href="/Dashboard/Students" class="menu-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Students" ? "active" : "")">👥 Danh Sách Học Sinh</a></li>
-                
+                <li>
+                    <a href="/Dashboard"
+                       class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" && ViewContext.RouteData.Values["action"]?.ToString() == "Index") ? "active" : "")">
+                        🏠 Trang Chủ
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Dashboard/Students"
+                       class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" && ViewContext.RouteData.Values["action"]?.ToString() == "Students") ? "active" : "")">
+                        👥 Danh Sách Học Sinh
+                    </a>
+                </li>
+
                 @if (ViewBag.VaiTro == "ADMIN" || ViewBag.VaiTro == "BGH")
                 {
-                    <li><a href="/Dashboard/Classes" class="menu-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Classes" ? "active" : "")">📚 Danh Sách Lớp</a></li>
+                    <li>
+                        <a href="/Dashboard/Classes"
+                           class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" && ViewContext.RouteData.Values["action"]?.ToString() == "Classes") ? "active" : "")">
+                            📚 Danh Sách Lớp
+                        </a>
+                    </li>
                 }
-                
+
                 @if (ViewBag.VaiTro == "ADMIN" || ViewBag.VaiTro == "BGH" || ViewBag.VaiTro == "GVCN")
                 {
-                    <li><a href="/Dashboard/AddStudent" class="menu-link @(ViewContext.RouteData.Values["action"]?.ToString() == "AddStudent" ? "active" : "")">➕ Thêm Học Sinh</a></li>
-                    <li><a href="/Dashboard/EditStudent" class="menu-link @(ViewContext.RouteData.Values["action"]?.ToString() == "EditStudent" ? "active" : "")">✏️ Chỉnh Sửa</a></li>
+                    <li>
+                        <a href="/Dashboard/AddStudent"
+                           class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" && ViewContext.RouteData.Values["action"]?.ToString() == "AddStudent") ? "active" : "")">
+                            ➕ Thêm Học Sinh
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Dashboard/EditStudent"
+                           class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" && ViewContext.RouteData.Values["action"]?.ToString() == "EditStudent") ? "active" : "")">
+                            ✏️ Chỉnh Sửa
+                        </a>
+                    </li>
                 }
             </ul>
+
+            @if (ViewBag.VaiTro == "ADMIN" || ViewBag.VaiTro == "BGH" || ViewBag.VaiTro == "GVCN")
+            {
+                <div class="sidebar-title">📊 Quản Lý Điểm</div>
+                <ul class="sidebar-menu">
+                    <li>
+                        <a href="/Dashboard/Scores"
+                           class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" && ViewContext.RouteData.Values["action"]?.ToString() == "Scores") ? "active" : "")">
+                            📈 Tổng Quan Điểm
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/HocSinhWeb/NhapDiem"
+                           class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "HocSinhWeb" && ViewContext.RouteData.Values["action"]?.ToString() == "NhapDiem") ? "active" : "")">
+                            📝 Nhập Điểm
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/HocSinhWeb/DiemTBMon"
+                           class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "HocSinhWeb" && ViewContext.RouteData.Values["action"]?.ToString() == "DiemTBMon") ? "active" : "")">
+                            📘 Điểm TB Môn
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/HocSinhWeb/DiemTBHK"
+                           class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "HocSinhWeb" && ViewContext.RouteData.Values["action"]?.ToString() == "DiemTBHK") ? "active" : "")">
+                            📗 Điểm TB Học Kỳ
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/HocSinhWeb/BangDiem"
+                           class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "HocSinhWeb" && ViewContext.RouteData.Values["action"]?.ToString() == "BangDiem") ? "active" : "")">
+                            📑 Bảng Điểm Lớp
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/HocSinhWeb/TongHop"
+                           class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "HocSinhWeb" && ViewContext.RouteData.Values["action"]?.ToString() == "TongHop") ? "active" : "")">
+                            📋 Tổng Hợp Học Kỳ
+                        </a>
+                    </li>
+                </ul>
+            }
 
             @if (ViewBag.VaiTro == "ADMIN" || ViewBag.VaiTro == "BGH")
             {
                 <div class="sidebar-title">⚙️ Quản Trị</div>
                 <ul class="sidebar-menu">
-                    <li><a href="/Dashboard/Permissions" class="menu-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Permissions" ? "active" : "")">🔐 Quản Lý Quyền</a></li>
-                    <li><a href="/Dashboard/Reports" class="menu-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Reports" ? "active" : "")">📊 Báo Cáo</a></li>
-                    <li><a href="/Dashboard/Scores" class="menu-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Scores" ? "active" : "")">📈 Điểm Số Học Sinh</a></li>
-                </ul>
-            }
-
-            @if (ViewBag.VaiTro == "GVCN")
-            {
-                <div class="sidebar-title">📚 Quản Lý Lớp</div>
-                <ul class="sidebar-menu">
-                    <li><a href="/Dashboard/Scores" class="menu-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Scores" ? "active" : "")">📈 Điểm Số Lớp</a></li>
+                    <li>
+                        <a href="/Dashboard/Permissions"
+                           class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" && ViewContext.RouteData.Values["action"]?.ToString() == "Permissions") ? "active" : "")">
+                            🔐 Quản Lý Quyền
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Dashboard/Reports"
+                           class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" && ViewContext.RouteData.Values["action"]?.ToString() == "Reports") ? "active" : "")">
+                            📊 Báo Cáo
+                        </a>
+                    </li>
                 </ul>
             }
 
@@ -62,15 +139,21 @@
             {
                 <div class="sidebar-title">📚 Học Tập</div>
                 <ul class="sidebar-menu">
-                    <li><a href="/Dashboard/Scores" class="menu-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Scores" ? "active" : "")">📈 Điểm Số</a></li>
+                    <li>
+                        <a href="/Dashboard/Scores"
+                           class="menu-link @((ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" && ViewContext.RouteData.Values["action"]?.ToString() == "Scores") ? "active" : "")">
+                            📈 Điểm Số
+                        </a>
+                    </li>
                 </ul>
             }
         </div>
 
-        <!-- Main Content -->
         <div class="content">
             @RenderBody()
         </div>
     </div>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
