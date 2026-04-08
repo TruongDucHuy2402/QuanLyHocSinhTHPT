@@ -98,3 +98,6 @@ C:\Users\Admin\QuanLyHocSinhTHPT\obj\Debug\net9.0\refint\QuanLyHocSinhTHPT.dll
 C:\Users\Admin\QuanLyHocSinhTHPT\obj\Debug\net9.0\QuanLyHocSinhTHPT.pdb
 C:\Users\Admin\QuanLyHocSinhTHPT\obj\Debug\net9.0\QuanLyHocSinhTHPT.genruntimeconfig.cache
 C:\Users\Admin\QuanLyHocSinhTHPT\obj\Debug\net9.0\ref\QuanLyHocSinhTHPT.dll
+C:\Users\Admin\QuanLyHocSinhTHPT\obj\Debug\net9.0\compressed\4mgydkggq3-h5cf4jv8gc.gz
+C:\Users\Admin\QuanLyHocSinhTHPT\obj\Debug\net9.0\compressed\mdj2xoltej-gsf2zxmaja.gz
+C:\Users\Admin\QuanLyHocSinhTHPT\obj\Debug\net9.0\compressed\lyvlo66iyu-jhh6x3k1d7.gz

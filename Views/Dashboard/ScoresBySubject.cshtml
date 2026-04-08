@@ -1,298 +1,141 @@
 @{
     ViewData["Title"] = "Chi Tiết Điểm Theo Môn";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+    int maLop = ViewBag.MaLop ?? 1;
+    int hocKy = ViewBag.HocKy ?? 1;
+    string namHoc = ViewBag.NamHoc ?? "2024-2025";
 }
 
-<link rel="stylesheet" href="~/css/scores.css" />
-<link rel="stylesheet" href="~/css/tables.css" />
+@section Styles {
+    <link rel="stylesheet" href="~/css/scores.css" />
+    <link rel="stylesheet" href="~/css/tables.css" />
+}
 
 <div class="scores-container">
-    <div class="panel-title">📊 Chi Tiết Điểm Theo Từng Môn Học</div>
+    <div class="panel-title">📊 Chi Tiết Điểm Theo Môn Học</div>
 
     @if (ViewBag.ErrorMessage != null)
     {
-        <div class="alert alert-danger">
-            @ViewBag.ErrorMessage
-        </div>
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
     }
 
-    <!-- Navigation Back -->
+    <!-- Back -->
     <div class="filter-section">
-        <a href="/Dashboard/Scores" class="btn-primary">← Quay Lại Trang Điểm</a>
+        <a href="/Dashboard/Scores?maLop=@maLop&hocKy=@hocKy&namHoc=@namHoc" class="btn-primary">
+            ← Quay Lại
+        </a>
     </div>
 
-    <!-- Subject Selection -->
+    <!-- Filter -->
     <div class="filter-section">
         <div class="filter-group">
-            <label>Chọn Môn Học:</label>
-            <select id="monHoc" class="form-control" onchange="updateStatistics()">
-                <option value="">-- Chọn Môn --</option>
-            </select>
+            <label>Môn học:</label>
+            <select id="monHoc" class="form-control"></select>
         </div>
+
         <div class="filter-group">
-            <label>Kiểu Điểm:</label>
-            <select id="loaiDiem" class="form-control" onchange="updateStatistics()">
-                <option value="">-- Tất Cả --</option>
-                <option value="15">Điểm 15 phút</option>
-                <option value="45">Điểm 45 phút</option>
-                <option value="112">Thi Học Kỳ</option>
+            <label>Loại điểm:</label>
+            <select id="loaiDiem" class="form-control">
+                <option value="">-- Tất cả --</option>
+                <option value="1">Miệng</option>
+                <option value="2">15 phút</option>
+                <option value="3">1 tiết</option>
+                <option value="4">Giữa kỳ</option>
+                <option value="5">Cuối kỳ</option>
             </select>
         </div>
     </div>
 
-    <!-- Statistics by Subject -->
-    <div class="table-wrapper" id="statisticsSection" style="display: none;">
-        <h3 class="section-title">📈 Thống Kê Chung</h3>
+    <!-- Statistics -->
+    <div class="table-wrapper" id="statisticsSection" style="display:none;">
+        <h3 class="section-title">📈 Thống Kê</h3>
         <table class="scores-table">
-            <thead>
-                <tr>
-                    <th>Tiêu Chí</th>
-                    <th>Giá Trị</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Điểm Cao Nhất</td>
-                    <td class="font-bold" id="maxScore">0.00</td>
-                </tr>
-                <tr>
-                    <td>Điểm Thấp Nhất</td>
-                    <td class="font-bold" id="minScore">0.00</td>
-                </tr>
-                <tr>
-                    <td>Điểm Trung Bình</td>
-                    <td class="font-bold" id="avgScore">0.00</td>
-                </tr>
-            </tbody>
+            <tr><td>Cao nhất</td><td id="maxScore"></td></tr>
+            <tr><td>Thấp nhất</td><td id="minScore"></td></tr>
+            <tr><td>Trung bình</td><td id="avgScore"></td></tr>
         </table>
     </div>
 
-    <!-- Detailed Distribution Table -->
-    <div class="table-wrapper" id="distributionSection" style="margin-top: 30px; display: none;">
-        <h3 class="section-title">📋 Phân Bố Điểm Theo Mức Độ</h3>
+    <!-- Distribution -->
+    <div class="table-wrapper" id="distributionSection" style="display:none;">
+        <h3 class="section-title">📊 Phân Bố</h3>
         <table class="scores-table">
-            <thead>
-                <tr>
-                    <th>Mức Độ</th>
-                    <th>Số Lượng HS</th>
-                    <th>% Số Lượng</th>
-                    <th>Biểu Đồ</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="excellent">
-                    <td><strong>Giỏi (≥8.0)</strong></td>
-                    <td class="font-bold" id="soGioi">0</td>
-                    <td class="font-bold" id="tileGioi">0.0%</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="barGioi" style="width: 0%; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);">
-                                <span id="barGioiPercent">0.0%</span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="good">
-                    <td><strong>Khá (6.5-7.9)</strong></td>
-                    <td class="font-bold" id="soKha">0</td>
-                    <td class="font-bold" id="tileKha">0.0%</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="barKha" style="width: 0%; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
-                                <span id="barKhaPercent">0.0%</span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="average">
-                    <td><strong>Trung Bình (5.0-6.4)</strong></td>
-                    <td class="font-bold" id="soTrungBinh">0</td>
-                    <td class="font-bold" id="tileTrungBinh">0.0%</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="barTrungBinh" style="width: 0%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
-                                <span id="barTrungBinhPercent">0.0%</span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="poor">
-                    <td><strong>Yếu (&lt;5.0)</strong></td>
-                    <td class="font-bold" id="soYeu">0</td>
-                    <td class="font-bold" id="tileYeu">0.0%</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="barYeu" style="width: 0%; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
-                                <span id="barYeuPercent">0.0%</span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
+            <tr><td>Giỏi</td><td id="soGioi"></td><td id="tileGioi"></td></tr>
+            <tr><td>Khá</td><td id="soKha"></td><td id="tileKha"></td></tr>
+            <tr><td>Trung Bình</td><td id="soTB"></td><td id="tileTB"></td></tr>
+            <tr><td>Yếu</td><td id="soYeu"></td><td id="tileYeu"></td></tr>
         </table>
-    </div>
-
-
-    <!-- Notes Section -->
-    <div class="table-wrapper" style="margin-top: 30px;">
-        <h3 class="section-title">📝 Ghi Chú</h3>
-        <div style="padding: 15px; line-height: 1.8; color: #555;">
-            <ul>
-                <li><strong>Giỏi:</strong> Điểm từ 8.0 trở lên</li>
-                <li><strong>Khá:</strong> Điểm từ 6.5 đến 7.9</li>
-                <li><strong>Trung Bình:</strong> Điểm từ 5.0 đến 6.4</li>
-                <li><strong>Yếu:</strong> Điểm dưới 5.0</li>
-            </ul>
-            <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
-                <em>Dữ liệu cập nhật: <span id="lastUpdate">@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</span></em>
-            </p>
-        </div>
     </div>
 </div>
 
 <script>
-    // Get current class (maLop) from ViewBag
-    let currentMaLop = @(ViewBag.MaLop ?? 1);
-    let currentHocKy = @(ViewBag.HocKy ?? 1);
-    let currentNamHoc = "@(ViewBag.NamHoc ?? "2024-2025")";
+    const maLop = @maLop;
+    const hocKy = @hocKy;
+    const namHoc = "@namHoc";
 
-    console.log('Current MaLop:', currentMaLop);
-    console.log('Current HocKy:', currentHocKy);
-    console.log('Current NamHoc:', currentNamHoc);
-
-    // Load subjects from API when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('Page loaded');
+    document.addEventListener("DOMContentLoaded", () => {
         loadSubjects();
-        
-        // If maMon is in URL, pre-select and update statistics
-        const urlParams = new URLSearchParams(window.location.search);
-        const maMon = urlParams.get('maMon');
-        const loaiDiem = urlParams.get('loaiDiem');
-        
-        console.log('URL maMon:', maMon, 'loaiDiem:', loaiDiem);
-        
+
+        const url = new URLSearchParams(window.location.search);
+        const maMon = url.get("maMon");
+
         if (maMon) {
-            document.getElementById('monHoc').value = maMon;
-            if (loaiDiem) {
-                document.getElementById('loaiDiem').value = loaiDiem;
-            }
-            updateStatistics();
+            setTimeout(() => {
+                document.getElementById("monHoc").value = maMon;
+                loadData();
+            }, 300);
         }
     });
 
-    // Fetch and populate subject dropdown
     function loadSubjects() {
-        console.log('Loading subjects from /Dashboard/GetSubjects');
-        fetch('/Dashboard/GetSubjects')
-            .then(response => {
-                console.log('Response status:', response.status);
-                return response.json();
-            })
+        fetch("/Dashboard/GetSubjects")
+            .then(res => res.json())
             .then(data => {
-                console.log('Subjects loaded:', data);
-                const monHocSelect = document.getElementById('monHoc');
-                
-                // Keep the default option
-                while (monHocSelect.options.length > 1) {
-                    monHocSelect.remove(1);
-                }
-                
-                // Add subjects from API
-                if (Array.isArray(data)) {
-                    data.forEach(mon => {
-                        const option = document.createElement('option');
-                        option.value = mon.maMon;
-                        option.textContent = mon.tenMon;
-                        monHocSelect.appendChild(option);
-                    });
-                    console.log('Subjects added:', data.length);
-                } else {
-                    console.error('Data is not an array:', data);
-                }
-            })
-            .catch(error => console.error('Error loading subjects:', error));
-    }
+                const select = document.getElementById("monHoc");
+                select.innerHTML = '<option value="">-- chọn môn --</option>';
 
-    function updateStatistics() {
-        const monHoc = document.getElementById('monHoc').value;
-        const loaiDiem = document.getElementById('loaiDiem').value;
-        
-        console.log('updateStatistics called - monHoc:', monHoc, 'loaiDiem:', loaiDiem);
-        
-        if (!monHoc) {
-            document.getElementById('statisticsSection').style.display = 'none';
-            document.getElementById('distributionSection').style.display = 'none';
-            return;
-        }
+                data.forEach(m => {
+                    select.innerHTML += `<option value="${m.maMon}">${m.tenMon}</option>`;
+                });
 
-        // Call API to get score distribution
-        let url = `/Dashboard/GetScoreDistribution?maLop=${currentMaLop}&maMon=${monHoc}&hocKy=${currentHocKy}&namHoc=${currentNamHoc}`;
-        if (loaiDiem) {
-            url += `&loaiDiem=${loaiDiem}`;
-        }
-
-        console.log('Calling API:', url);
-
-        fetch(url)
-            .then(response => {
-                console.log('API Response status:', response.status);
-                return response.json();
-            })
-            .then(data => {
-                console.log('API Response data:', data);
-                if (data.error) {
-                    console.error('Error:', data.error);
-                    document.getElementById('statisticsSection').style.display = 'none';
-                    document.getElementById('distributionSection').style.display = 'none';
-                    return;
-                }
-
-                // Update statistics
-                document.getElementById('maxScore').textContent = data.maxScore.toFixed(2);
-                document.getElementById('minScore').textContent = data.minScore.toFixed(2);
-                document.getElementById('avgScore').textContent = data.avgScore.toFixed(2);
-
-                // Update distribution data
-                updateDistributionTable(data);
-
-                // Show sections
-                document.getElementById('statisticsSection').style.display = 'block';
-                document.getElementById('distributionSection').style.display = 'block';
-                console.log('Statistics updated and displayed');
-            })
-            .catch(error => {
-                console.error('Error fetching score distribution:', error);
-                document.getElementById('statisticsSection').style.display = 'none';
-                document.getElementById('distributionSection').style.display = 'none';
+                select.onchange = loadData;
+                document.getElementById("loaiDiem").onchange = loadData;
             });
     }
 
-    function updateDistributionTable(data) {
-        const totalHS = data.tongHocSinh;
+    function loadData() {
+        const maMon = document.getElementById("monHoc").value;
+        const loaiDiem = document.getElementById("loaiDiem").value;
 
-        // Giỏi
-        document.getElementById('soGioi').textContent = data.soGioi;
-        document.getElementById('tileGioi').textContent = data.tiLeGioi.toFixed(1) + '%';
-        document.getElementById('barGioi').style.width = data.tiLeGioi + '%';
-        document.getElementById('barGioiPercent').textContent = data.tiLeGioi.toFixed(0) + '%';
+        if (!maMon) return;
 
-        // Khá
-        document.getElementById('soKha').textContent = data.soKha;
-        document.getElementById('tileKha').textContent = data.tiLeKha.toFixed(1) + '%';
-        document.getElementById('barKha').style.width = data.tiLeKha + '%';
-        document.getElementById('barKhaPercent').textContent = data.tiLeKha.toFixed(0) + '%';
+        let url = `/Dashboard/GetScoreDistribution?maLop=${maLop}&maMon=${maMon}&hocKy=${hocKy}&namHoc=${namHoc}`;
+        if (loaiDiem) url += `&loaiDiem=${loaiDiem}`;
 
-        // Trung Bình
-        document.getElementById('soTrungBinh').textContent = data.soTrungBinh;
-        document.getElementById('tileTrungBinh').textContent = data.tiLeTrungBinh.toFixed(1) + '%';
-        document.getElementById('barTrungBinh').style.width = data.tiLeTrungBinh + '%';
-        document.getElementById('barTrungBinhPercent').textContent = data.tiLeTrungBinh.toFixed(0) + '%';
+        fetch(url)
+            .then(res => res.json())
+            .then(d => {
+                if (d.error) return;
 
-        // Yếu
-        document.getElementById('soYeu').textContent = data.soYeu;
-        document.getElementById('tileYeu').textContent = data.tiLeYeu.toFixed(1) + '%';
-        document.getElementById('barYeu').style.width = data.tiLeYeu + '%';
-        document.getElementById('barYeuPercent').textContent = data.tiLeYeu.toFixed(0) + '%';
+                document.getElementById("statisticsSection").style.display = "block";
+                document.getElementById("distributionSection").style.display = "block";
+
+                document.getElementById("maxScore").innerText = d.maxScore.toFixed(2);
+                document.getElementById("minScore").innerText = d.minScore.toFixed(2);
+                document.getElementById("avgScore").innerText = d.avgScore.toFixed(2);
+
+                document.getElementById("soGioi").innerText = d.soGioi;
+                document.getElementById("tileGioi").innerText = d.tiLeGioi.toFixed(1) + "%";
+
+                document.getElementById("soKha").innerText = d.soKha;
+                document.getElementById("tileKha").innerText = d.tiLeKha.toFixed(1) + "%";
+
+                document.getElementById("soTB").innerText = d.soTrungBinh;
+                document.getElementById("tileTB").innerText = d.tiLeTrungBinh.toFixed(1) + "%";
+
+                document.getElementById("soYeu").innerText = d.soYeu;
+                document.getElementById("tileYeu").innerText = d.tiLeYeu.toFixed(1) + "%";
+            });
     }
 </script>

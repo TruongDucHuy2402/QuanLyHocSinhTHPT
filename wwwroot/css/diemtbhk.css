@@ -1,0 +1,212 @@
+.diemtbhk-page {
+    margin-top: 20px;
+}
+
+.diemtbhk-header {
+    margin-bottom: 24px;
+}
+
+.diemtbhk-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
+.diemtbhk-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+.diemtbhk-alert {
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+}
+
+.diemtbhk-alert-danger {
+    background: #fef2f2;
+    color: #b91c1c;
+    border-color: #fecaca;
+}
+
+.diemtbhk-filter-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e5e7eb;
+    margin-bottom: 28px;
+}
+
+.diemtbhk-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr)) auto;
+    gap: 18px;
+    align-items: end;
+}
+
+.diemtbhk-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.diemtbhk-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.diemtbhk-input,
+.diemtbhk-select {
+    width: 100%;
+    height: 46px;
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    font-size: 0.98rem;
+    color: #111827;
+    background: #ffffff;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.diemtbhk-input:focus,
+.diemtbhk-select:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+.diemtbhk-btn {
+    height: 46px;
+    border: none;
+    border-radius: 12px;
+    padding: 0 20px;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
+    transition: all 0.25s ease;
+}
+
+.diemtbhk-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 24px rgba(79, 70, 229, 0.28);
+}
+
+.diemtbhk-summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.diemtbhk-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.07);
+    border: 1px solid #e5e7eb;
+    position: relative;
+    overflow: hidden;
+}
+
+.diemtbhk-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, #6366f1 0%, #8b5cf6 100%);
+}
+
+.diemtbhk-card-title {
+    color: #6b7280;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 10px;
+}
+
+.diemtbhk-card-value {
+    color: #1f2937;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.diemtbhk-card-value.name {
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.diemtbhk-card-value.grade-good {
+    color: #15803d;
+}
+
+.diemtbhk-card-value.grade-fair {
+    color: #2563eb;
+}
+
+.diemtbhk-card-value.grade-average {
+    color: #d97706;
+}
+
+.diemtbhk-card-value.grade-weak {
+    color: #dc2626;
+}
+
+.diemtbhk-note {
+    margin-top: 28px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+    padding: 16px 18px;
+    color: #475569;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 1200px) {
+    .diemtbhk-summary {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+    }
+
+    .diemtbhk-filter-grid {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .diemtbhk-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .diemtbhk-filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .diemtbhk-title {
+        font-size: 1.6rem;
+    }
+
+    .diemtbhk-card-value {
+        font-size: 1.6rem;
+    }
+
+    .diemtbhk-card-value.name {
+        font-size: 1.15rem;
+    }
+}

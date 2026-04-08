@@ -173,37 +173,27 @@ namespace QuanLyHocSinhTHPT.Controllers
             }
 
             SetViewBagData();
+            ViewBag.DanhSachLop = _hocSinhService.GetDanhSachLopHoc();
 
             try
             {
-                // Nếu không có maLop, lấy từ session người dùng hiện tại
                 if (!maLop.HasValue)
                 {
                     var maMaHsStr = HttpContext.Session.GetString("MaHS");
-                    System.Diagnostics.Debug.WriteLine($"📌 Session MaHS: {maMaHsStr}");
-                    
+
                     if (!string.IsNullOrEmpty(maMaHsStr) && int.TryParse(maMaHsStr, out int maHS))
                     {
                         var student = _hocSinhService.GetHocSinhById(maHS);
                         maLop = student?.MaLop ?? 1;
-                        System.Diagnostics.Debug.WriteLine($"📌 Student MaHS={maHS}, MaLop={maLop}");
                     }
                     else
                     {
-                        maLop = 1; // Mặc định
-                        System.Diagnostics.Debug.WriteLine($"📌 No MaHS in session, using default MaLop=1");
+                        maLop = 1;
                     }
                 }
 
-                System.Diagnostics.Debug.WriteLine($"📌 Getting scores for: MaLop={maLop}, HocKy={hocKy}, NamHoc={namHoc}");
-
-                // Lấy danh sách điểm trung bình theo môn
                 var diemTheoMon = _hocSinhService.GetDiemTBTheoMon(maLop.Value, hocKy, namHoc);
-                System.Diagnostics.Debug.WriteLine($"📌 Found {diemTheoMon.Count} subjects with scores");
-                
-                // Lấy danh sách học sinh với điểm TB theo học kỳ
                 var danhSachHocSinh = _hocSinhService.GetHocSinhTheoLopWithDiem(maLop.Value, hocKy, namHoc);
-                System.Diagnostics.Debug.WriteLine($"📌 Found {danhSachHocSinh.Count} students in class with DiemTB");
 
                 ViewBag.DiemTheoMon = diemTheoMon;
                 ViewBag.DanhSachHocSinh = danhSachHocSinh;
@@ -212,20 +202,14 @@ namespace QuanLyHocSinhTHPT.Controllers
                 ViewBag.NamHoc = namHoc;
                 ViewBag.TongHocSinh = danhSachHocSinh.Count;
                 ViewBag.TongMon = diemTheoMon.Count;
-                ViewBag.DiemTBChung = diemTheoMon.Count > 0 
-                    ? diemTheoMon.Average(d => d.DiemTB_Mon ?? 0).ToString("F2") 
+                ViewBag.DiemTBChung = diemTheoMon.Count > 0
+                    ? diemTheoMon.Average(d => d.DiemTB_Mon ?? 0).ToString("F2")
                     : "0.00";
-                
-                // Debug info for diagnosis
-                ViewBag.DebugMaLop = maLop.Value;
-                ViewBag.DebugHocKy = hocKy;
-                ViewBag.DebugNamHoc = namHoc;
 
                 return View();
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"❌ Scores Error: {ex.Message}\n{ex.StackTrace}");
                 ViewBag.ErrorMessage = $"Có lỗi: {ex.Message}";
                 return View();
             }
@@ -314,31 +298,7 @@ namespace QuanLyHocSinhTHPT.Controllers
         {
             try
             {
-                // Map loaiDiem value to actual DB value if needed
-                string? dbLoaiDiem = null;
-                if (!string.IsNullOrEmpty(loaiDiem) && loaiDiem != "")
-                {
-                    // Convert "15" -> "15 phút", "45" -> "45 phút", "112" -> "Thi Học Kỳ"
-                    switch (loaiDiem)
-                    {
-                        case "15":
-                            dbLoaiDiem = "15 phút";
-                            break;
-                        case "45":
-                            dbLoaiDiem = "45 phút";
-                            break;
-                        case "112":
-                            dbLoaiDiem = "Thi Học Kỳ";
-                            break;
-                        default:
-                            dbLoaiDiem = loaiDiem;
-                            break;
-                    }
-                }
-
-                System.Diagnostics.Debug.WriteLine($"📌 GetScoreDistribution: maLop={maLop}, maMon={maMon}, loaiDiem={loaiDiem}, dbLoaiDiem={dbLoaiDiem}");
-
-                var distribution = _hocSinhService.GetScoreDistribution(maLop, maMon, hocKy, namHoc, dbLoaiDiem);
+                var distribution = _hocSinhService.GetScoreDistribution(maLop, maMon, hocKy, namHoc, loaiDiem);
                 return Json(distribution);
             }
             catch (Exception ex)
