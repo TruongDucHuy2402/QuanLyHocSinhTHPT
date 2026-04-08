@@ -1,0 +1,358 @@
+@using QuanLyHocSinhTHPT.Models
+@model List<BangDiem>
+@{
+    ViewData["Title"] = "Bảng Điểm Lớp";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+    var danhSachLop = ViewBag.DanhSachLop as List<LopHoc> ?? new List<LopHoc>();
+    var danhSachMon = ViewBag.DanhSachMon as List<MonHoc> ?? new List<MonHoc>();
+    
+    int maLop = ViewBag.MaLop != null ? (int)ViewBag.MaLop : 101;
+    int maMon = ViewBag.MaMon != null ? (int)ViewBag.MaMon : 1;
+    int hocKy = ViewBag.HocKy != null ? (int)ViewBag.HocKy : 1;
+    string namHoc = ViewBag.NamHoc?.ToString() ?? "2024-2025";
+    string tenLop = ViewBag.TenLop?.ToString() ?? "N/A";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/scores.css" />
+    <style>
+        .bangdiem-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .bangdiem-header {
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+
+        .bangdiem-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .bangdiem-meta {
+            font-size: 14px;
+            color: #7f8c8d;
+            line-height: 1.8;
+        }
+
+        .filter-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-size: 13px;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 8px 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-filter {
+            background: #3498db;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            align-self: flex-end;
+            transition: background 0.3s;
+        }
+
+        .btn-filter:hover {
+            background: #2980b9;
+        }
+
+        .bangdiem-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        .bangdiem-table thead {
+            background: #34495e;
+            color: white;
+        }
+
+        .bangdiem-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #ddd;
+        }
+
+        .bangdiem-table td {
+            padding: 10px 12px;
+            border: 1px solid #ecf0f1;
+            vertical-align: middle;
+        }
+
+        .bangdiem-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .bangdiem-table tbody tr:hover {
+            background: #e8f4f8;
+            transition: background 0.2s;
+        }
+
+        .diem-column {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .diem-10 { color: #27ae60; } /* Giỏi */
+        .diem-8 { color: #3498db; }  /* Khá */
+        .diem-5 { color: #f39c12; }  /* Trung bình */
+        .diem-0 { color: #e74c3c; }  /* Yếu */
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+
+        .table-summary {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 6px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .summary-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+}
+
+<div class="bangdiem-container">
+    <div class="bangdiem-header">
+        <div class="bangdiem-title">📊 Bảng Điểm Lớp Học</div>
+        <div class="bangdiem-meta">
+            <strong>Lớp:</strong> @tenLop (Lớp @maLop)<br/>
+            <strong>Học kỳ:</strong> HK @hocKy - Năm học @namHoc
+        </div>
+    </div>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            ⚠️ @ViewBag.ErrorMessage
+        </div>
+    }
+
+    <form method="get" action="/Dashboard/BangDiemLop" class="filter-section">
+        <div class="filter-group">
+            <label for="maLop">Chọn Lớp:</label>
+            <select name="maLop" id="maLop">
+                @if (danhSachLop.Count > 0)
+                {
+                    @foreach (var lop in danhSachLop)
+                    {
+                        @if (lop.MaLop == maLop)
+                        {
+                            <option value="@lop.MaLop" selected>@lop.TenLop (@lop.SoHocSinh HS)</option>
+                        }
+                        else
+                        {
+                            <option value="@lop.MaLop">@lop.TenLop (@lop.SoHocSinh HS)</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="maMon">Chọn Môn Học:</label>
+            <select name="maMon" id="maMon">
+                @if (danhSachMon.Count > 0)
+                {
+                    @foreach (var mon in danhSachMon)
+                    {
+                        @if (mon.MaMon == maMon)
+                        {
+                            <option value="@mon.MaMon" selected>@mon.TenMon</option>
+                        }
+                        else
+                        {
+                            <option value="@mon.MaMon">@mon.TenMon</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="hocKy">Học Kỳ:</label>
+            <select name="hocKy" id="hocKy">
+                @if (hocKy == 1)
+                {
+                    <option value="1" selected>Học kỳ 1</option>
+                    <option value="2">Học kỳ 2</option>
+                }
+                else
+                {
+                    <option value="1">Học kỳ 1</option>
+                    <option value="2" selected>Học kỳ 2</option>
+                }
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <button type="submit" class="btn-filter">🔍 Tìm Kiếm</button>
+        </div>
+    </form>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="bangdiem-table">
+            <thead>
+                <tr>
+                    <th style="width: 8%;">STT</th>
+                    <th style="width: 25%;">Họ và Tên</th>
+                    <th style="width: 15%;">Loại Điểm</th>
+                    <th style="width: 10%;" class="diem-column">Hệ Số</th>
+                    <th style="width: 10%;" class="diem-column">Điểm</th>
+                    <th style="width: 16%;" class="diem-column">Điểm TB Môn</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int stt = 1;
+                    string previousStudent = "";
+                    int totalCount = Model.Count;
+                }
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (item.TenHocSinh != previousStudent)
+                            {
+                                <strong>@stt</strong>
+                                previousStudent = item.TenHocSinh;
+                                stt++;
+                            }
+                        </td>
+                        <td>
+                            <strong>@item.TenHocSinh</strong>
+                        </td>
+                        <td>@item.LoaiDiem</td>
+                        <td class="diem-column">@(item.HeSo?.ToString("0.0") ?? "-")</td>
+                        <td class="diem-column">
+                            @if (item.SoDiem > 0)
+                            {
+                                <span class="@(item.SoDiem >= 8 ? "diem-10" : item.SoDiem >= 6.5 ? "diem-8" : item.SoDiem >= 5 ? "diem-5" : "diem-0")">
+                                    @item.SoDiem.ToString("0.0")
+                                </span>
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </td>
+                        <td class="diem-column">
+                            @if (item.DiemTB_Mon.HasValue)
+                            {
+                                <strong class="@(item.DiemTB_Mon >= 8 ? "diem-10" : item.DiemTB_Mon >= 6.5 ? "diem-8" : item.DiemTB_Mon >= 5 ? "diem-5" : "diem-0")">
+                                    @item.DiemTB_Mon.Value.ToString("0.00")
+                                </strong>
+                            }
+                            else
+                            {
+                                <span>Chưa có</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="table-summary">
+            <div class="summary-item">
+                <div class="summary-label">Tổng Bản Ghi</div>
+                <div class="summary-value">@totalCount</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-label">Học Sinh Khác Nhau</div>
+                <div class="summary-value">@(Model.Select(x => x.TenHocSinh).Distinct().Count())</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-label">Điểm TB Cao Nhất</div>
+                <div class="summary-value">
+                    @{
+                        var maxDiem = Model.Where(x => x.DiemTB_Mon.HasValue).Max(x => (float?)x.DiemTB_Mon);
+                    }
+                    @(maxDiem?.ToString("0.00") ?? "-")
+                </div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-label">Điểm TB Thấp Nhất</div>
+                <div class="summary-value">
+                    @{
+                        var minDiem = Model.Where(x => x.DiemTB_Mon.HasValue).Min(x => (float?)x.DiemTB_Mon);
+                    }
+                    @(minDiem?.ToString("0.00") ?? "-")
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="no-data">
+            <p>🔍 Không có dữ liệu điểm cho lớp và môn học này.</p>
+            <p style="font-size: 12px; margin-top: 10px;">Vui lòng chọn lớp và môn học khác hoặc kiểm tra dữ liệu trong hệ thống.</p>
+        </div>
+    }
+</div>
