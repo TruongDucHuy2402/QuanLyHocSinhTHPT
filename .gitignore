@@ -1,0 +1,16 @@
+# Thư mục build (QUAN TRỌNG NHẤT)
+[Bb]in/
+[Oo]bj/
+
+# File tạm của Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# File tạm của VS Code
+.vscode/
+
+# File cấu hình cá nhân (nếu có)
+appsettings.Development.json
